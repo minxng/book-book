@@ -10,9 +10,15 @@ const nextConfig: NextConfig = {
         pathname: "/dfd3hx72e/image/upload/v1746592572/**",
         search: "",
       },
+      {
+        protocol: "https",
+        hostname: "image.aladin.co.kr",
+        port: "",
+        pathname: "/**",
+        search: "",
+      },
     ],
   },
-  /* config options here */
 };
 
 export default nextConfig;
