@@ -9,7 +9,7 @@ interface PageProps {
   };
 }
 
-async function searchKeyword(keyword: string) {
+async function getSearchKeyword(keyword: string) {
   const response = await fetch(
     `http://www.aladin.co.kr/ttb/api/ItemSearch.aspx?ttbkey=ttbskmnjng2132001&Query=${keyword}&QueryType=Title&MaxResults=10&start=1&SearchTarget=Book&output=JS&Version=20131101`
   );
@@ -19,7 +19,7 @@ async function searchKeyword(keyword: string) {
 
 export default async function List({ params }: PageProps) {
   const { keyword } = await params;
-  const data = await searchKeyword(keyword);
+  const data = await getSearchKeyword(keyword);
   console.log(data);
   return (
     <div className="bg-amber-200">
