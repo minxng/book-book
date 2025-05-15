@@ -21,7 +21,6 @@ export default function Banner() {
       loop={true}
       autoplay={{
         delay: 3000,
-        disableOnInteraction: true,
       }}
     >
       {banner_image_urls.map((url) => (

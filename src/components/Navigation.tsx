@@ -6,7 +6,7 @@ import logo from "../../public/logo.png";
 
 export default function Navigation() {
   return (
-    <nav className="flex w-4/5 mx-auto my-0 py-4 gap-10 items-center justify-between">
+    <nav className="flex max-w-[1200px] w-4/5 mx-auto my-0 py-4 gap-10 items-center justify-between">
       <h1>
         <Link href={"/"}>
           <Image src={logo} alt="logo" width={100} />
