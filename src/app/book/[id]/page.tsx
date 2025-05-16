@@ -1,19 +1,13 @@
+import { getBookDetail } from "@/lib/api/aladin";
 import Image from "next/image";
-
-async function getBookDetail(id: string) {
-  const response = await fetch(
-    `http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbskmnjng2132001&itemIdType=isbn13&ItemId=${id}&output=JS&Version=20131101&OptResult=ebookList,usedList,reviewList`
-  );
-  const json = await response.json();
-  return json.item[0];
-}
 
 export default async function BookDetail({
   params,
 }: {
   params: { id: string };
 }) {
-  const book = await getBookDetail(params.id);
+  const { id } = await params;
+  const book = await getBookDetail(id);
   return (
     <section className="w-4/5 max-w-[1200px] mx-auto flex">
       <div className="relative aspect-auto">

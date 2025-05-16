@@ -1,21 +1,6 @@
 import Banner from "@/components/Banner";
 import BookSlide from "@/components/BookSlide";
-
-export async function getBestSeller() {
-  const response = await fetch(
-    "http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbskmnjng2132001&QueryType=Bestseller&MaxResults=10&start=1&SearchTarget=Book&output=JS&Cover=Big&Version=20131101"
-  );
-  const json = await response.json();
-  return json;
-}
-
-export async function getNewBooks() {
-  const response = await fetch(
-    "http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbskmnjng2132001&QueryType=ItemNewSpecial&MaxResults=10&start=1&SearchTarget=Book&output=JS&Cover=Big&Version=20131101"
-  );
-  const json = await response.json();
-  return json;
-}
+import { getBestSeller, getNewBooks } from "@/lib/api/aladin";
 
 export default async function Home() {
   const bestseller = await getBestSeller();
