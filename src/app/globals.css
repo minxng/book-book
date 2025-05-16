@@ -25,3 +25,7 @@ body {
   color: var(--foreground);
   font-family: "Noto Sans KR", sans-serif;
 }
+
+li {
+  list-style: none;
+}
