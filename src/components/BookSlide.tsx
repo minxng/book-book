@@ -22,13 +22,19 @@ interface Book {
     item: BookItem[];
   };
   title: string;
+  type: string;
 }
 
-export default function BookSlide({ books, title }: Book) {
+export default function BookSlide({ books, title, type }: Book) {
   SwiperCore.use([Navigation, Scrollbar, Autoplay]);
   return (
     <section className="py-6">
-      <h2 className="text-2xl font-bold py-4">{title}</h2>
+      <Link href={`/list/${type}`}>
+        <h2 className="text-2xl font-bold py-4 flex items-center gap-2">
+          {title}
+          <IoIosArrowForward />
+        </h2>
+      </Link>
       <Swiper
         loop={true}
         slidesPerView={5}

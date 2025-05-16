@@ -13,7 +13,7 @@ export default function Navigation() {
   const router = useRouter();
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push(`/list/${keyword}`);
+    router.push(`/list/search?keyword=${keyword}`);
   };
   return (
     <nav className="flex max-w-[1200px] w-4/5 mx-auto my-0 py-4 gap-10 items-center justify-between">
