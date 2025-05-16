@@ -1,7 +1,7 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
+import { IoIosArrowForward } from "react-icons/io";
 import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -44,11 +44,11 @@ export default function BookSlide({ books, title, type }: Book) {
         }}
       >
         {books.item.map((book) => (
-          <SwiperSlide key={book.itemId} className="relative">
+          <SwiperSlide key={book.itemId}>
             <Link href={`/book/${book.isbn13}`}>
               <div className="relative w-full aspect-[170/240]">
                 <Image
-                  src={book.cover.replace("coversum", "cover500")}
+                  src={book.cover}
                   alt="book cover"
                   className="w-full h-full object-contain"
                   fill
