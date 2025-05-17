@@ -13,6 +13,7 @@ export default function Navigation() {
   const router = useRouter();
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!keyword) return;
     router.push(`/list/search?keyword=${keyword}`);
   };
   return (
