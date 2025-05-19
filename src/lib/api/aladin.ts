@@ -17,6 +17,14 @@ export async function getNewBooks() {
   return json;
 }
 
+export async function getRecommendBooks() {
+  const response = await fetch(
+    `${BASE_URL}/ItemList.aspx?ttbkey=${API_KEY}&QueryType=ItemEditorChoice&MaxResults=10&start=1&SearchTarget=Book&CategoryId=50930&output=JS&Cover=Big&Version=20131101`
+  );
+  const json = await response.json();
+  return json;
+}
+
 export async function getBookDetail(id: string) {
   const response = await fetch(
     `${BASE_URL}/ItemLookUp.aspx?ttbkey=${API_KEY}&itemIdType=isbn13&ItemId=${id}&output=JS&Version=20131101`

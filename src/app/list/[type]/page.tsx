@@ -1,5 +1,10 @@
 import List from "@/components/List";
-import { getBestSeller, getNewBooks, getSearchKeyword } from "@/lib/api/aladin";
+import {
+  getBestSeller,
+  getNewBooks,
+  getRecommendBooks,
+  getSearchKeyword,
+} from "@/lib/api/aladin";
 
 interface PageProps {
   params: {
@@ -19,6 +24,8 @@ export default async function ListPage({ params, searchParams }: PageProps) {
     books = await getBestSeller();
   } else if (type === "newBook") {
     books = await getNewBooks();
+  } else if (type === "recommendBook") {
+    books = await getRecommendBooks();
   } else if (type === "search" && keyword) {
     books = await getSearchKeyword(keyword);
   }
