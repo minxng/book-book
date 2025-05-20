@@ -1,9 +1,11 @@
 const BASE_URL = "http://www.aladin.co.kr/ttb/api";
 const API_KEY = process.env.NEXT_PUBLIC_ALADIN_API_KEY;
 
-export async function getBestSeller() {
+export async function getBestSeller(categoryId?: number) {
   const response = await fetch(
-    `${BASE_URL}/ItemList.aspx?ttbkey=${API_KEY}&QueryType=Bestseller&MaxResults=10&start=1&SearchTarget=Book&output=JS&Cover=Big&Version=20131101`
+    `${BASE_URL}/ItemList.aspx?ttbkey=${API_KEY}&QueryType=Bestseller&CategoryId=${
+      categoryId ?? 0
+    }&MaxResults=10&start=1&SearchTarget=Book&output=JS&Cover=Big&Version=20131101`
   );
   const json = await response.json();
   return json;

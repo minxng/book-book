@@ -6,6 +6,7 @@ import {
   getRecommendBooks,
   getSearchKeyword,
 } from "@/lib/api/aladin";
+import Link from "next/link";
 
 interface PageProps {
   params: {
@@ -13,16 +14,17 @@ interface PageProps {
   };
   searchParams: {
     keyword: string;
+    categoryId: number;
   };
 }
 
 export default async function ListPage({ params, searchParams }: PageProps) {
   const { type } = await params;
-  const { keyword } = await searchParams;
+  const { keyword, categoryId } = await searchParams;
 
   let books;
   if (type === "bestSeller") {
-    books = await getBestSeller();
+    books = await getBestSeller(categoryId);
   } else if (type === "newBook") {
     books = await getNewBooks();
   } else if (type === "recommendBook") {
@@ -37,7 +39,11 @@ export default async function ListPage({ params, searchParams }: PageProps) {
           <p>분야별 베스트셀러 확인</p>
           <ul>
             {categories.map((category) => (
-              <li key={category.id}>{category.title}</li>
+              <li key={category.id}>
+                <Link href={`/list/bestSeller?categoryId=${category.id}`}>
+                  {category.title}
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
