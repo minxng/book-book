@@ -1,3 +1,4 @@
+import { categories } from "@/app/constant";
 import List from "@/components/List";
 import {
   getBestSeller,
@@ -18,7 +19,7 @@ interface PageProps {
 export default async function ListPage({ params, searchParams }: PageProps) {
   const { type } = await params;
   const { keyword } = await searchParams;
-  const categories = ["a", "b"];
+
   let books;
   if (type === "bestSeller") {
     books = await getBestSeller();
@@ -36,7 +37,7 @@ export default async function ListPage({ params, searchParams }: PageProps) {
           <p>분야별 베스트셀러 확인</p>
           <ul>
             {categories.map((category) => (
-              <li key={category}>{category}</li>
+              <li key={category.id}>{category.title}</li>
             ))}
           </ul>
         </div>
