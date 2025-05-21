@@ -1,5 +1,5 @@
 import { categories } from "@/app/constant";
-import List from "@/components/List";
+import BookList from "@/components/BookList";
 import {
   getBestSeller,
   getNewBooks,
@@ -50,7 +50,7 @@ export default async function ListPage({ params, searchParams }: PageProps) {
             ))}
           </ul>
         </div>
-        <List books={books} />
+        <BookList books={books} />
       </div>
     </section>
   );
