@@ -24,7 +24,7 @@ export default function Navigation() {
         </Link>
       </h1>
       <div className="border-emerald-800 border-1 p-2 rounded-2xl flex items-center  w-1/2">
-        <BiSearch size={24} color="#527555" />
+        <BiSearch size={24} className="text-primary" />
         <form action="" onSubmit={handleOnSubmit}>
           <input
             type="text"
@@ -34,8 +34,9 @@ export default function Navigation() {
           />
         </form>
       </div>
-      <div>
-        <BsPersonCircle size={30} color="#527555" />
+      <div className="flex items-center gap-2 cursor-pointer" onClick={login}>
+        <BsPersonCircle size={30} className="text-primary" />
+        로그인
       </div>
     </nav>
   );
