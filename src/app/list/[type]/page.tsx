@@ -34,12 +34,15 @@ export default async function ListPage({ params, searchParams }: PageProps) {
   }
   return (
     <section className="w-4/5 max-w-[1200px] mx-auto">
-      <div className="flex mt-8">
+      <div className="flex mt-8 gap-8">
         <div className="basis-1/5">
-          <p>분야별 베스트셀러 확인</p>
+          <p className="font-bold text-lg mb-3">분야별 베스트셀러</p>
           <ul>
             {categories.map((category) => (
-              <li key={category.id}>
+              <li
+                key={category.id}
+                className="mb-2 hover:text-primary-600 text-sm"
+              >
                 <Link href={`/list/bestSeller?categoryId=${category.id}`}>
                   {category.title}
                 </Link>
