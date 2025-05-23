@@ -22,15 +22,15 @@ interface BooksProps {
 
 export default function BookList({ books }: BooksProps) {
   return (
-    <ul className="basis-4/5">
+    <ul>
       {books.item.map((book) => (
         <li
           key={book.itemId}
-          className="flex gap-8  border-b-primary-200 border-b py-12"
+          className="flex gap-8  border-b-primary-200 border-b py-8 first:pt-0"
         >
           <Link href={`/book/${book.isbn13}`}>
             <div className="basis-1/5">
-              <Image src={book.cover} alt="표지지" width={200} height={200} />
+              <Image src={book.cover} alt="표지지" width={120} height={200} />
             </div>
           </Link>
           <div className="basis-4/5 flex flex-col gap-2">
