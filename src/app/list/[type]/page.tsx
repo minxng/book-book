@@ -1,5 +1,6 @@
 import { categories } from "@/app/constant";
 import BookList from "@/components/BookList";
+import Pagination from "@/components/Pagination";
 import {
   getBestSeller,
   getNewBooks,
@@ -15,22 +16,31 @@ interface PageProps {
   searchParams: {
     keyword: string;
     categoryId: number;
+    page: number;
   };
 }
 
 export default async function ListPage({ params, searchParams }: PageProps) {
   const { type } = await params;
-  const { keyword, categoryId } = await searchParams;
+  const { keyword, categoryId, page } = await searchParams;
 
-  let books;
-  if (type === "bestSeller") {
-    books = await getBestSeller(categoryId);
-  } else if (type === "newBook") {
-    books = await getNewBooks();
-  } else if (type === "recommendBook") {
-    books = await getRecommendBooks();
-  } else if (type === "search" && keyword) {
-    books = await getSearchKeyword(keyword);
+  const getBooks = async (page: number) => {
+    if (type === "bestSeller") {
+      return await getBestSeller(page, categoryId);
+    } else if (type === "newBook") {
+      return await getNewBooks(page);
+    } else if (type === "recommendBook") {
+      return await getRecommendBooks(page);
+    } else if (type === "search" && keyword) {
+      return await getSearchKeyword(page, keyword);
+    }
+    return null;
+  };
+  const currentPage = Number(page || 1);
+  const books = await getBooks(currentPage);
+  const pagination = [];
+  for (let i = books.startIndex; i < books.startIndex + 10; i++) {
+    pagination.push(i);
   }
   return (
     <section className="w-4/5 max-w-[1200px] mx-auto mt-4 border-primary-200 border-t-1">
@@ -58,6 +68,12 @@ export default async function ListPage({ params, searchParams }: PageProps) {
           <BookList books={books} />
         </div>
       </div>
+      <Pagination
+        pagination={pagination}
+        currentType={type}
+        currentCategory={categoryId}
+        currentKeyword={keyword}
+      />
     </section>
   );
 }
