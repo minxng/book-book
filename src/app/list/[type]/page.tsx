@@ -61,10 +61,12 @@ export default async function ListPage({ params, searchParams }: PageProps) {
           </ul>
         </div>
         <div className="basis-4/5">
-          <p className="mb-8">
-            <span className="font-bold text-primary-600">{keyword}</span> 검색
-            결과 총 {books.totalResults}건
-          </p>
+          {type === "search" && (
+            <p className="mb-8">
+              <span className="font-bold text-primary-600">{keyword}</span> 검색
+              결과 총 {books.totalResults}건
+            </p>
+          )}
           <BookList books={books} />
         </div>
       </div>
