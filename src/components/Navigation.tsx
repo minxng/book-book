@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
 import logo from "../../public/logo.png";
@@ -11,6 +11,12 @@ import logo from "../../public/logo.png";
 export default function Navigation() {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
+  const pathname = usePathname();
+  useEffect(() => {
+    if (!pathname.startsWith("/list/search")) {
+      setKeyword("");
+    }
+  }, [pathname]);
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!keyword) return;
