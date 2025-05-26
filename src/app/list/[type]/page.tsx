@@ -38,10 +38,6 @@ export default async function ListPage({ params, searchParams }: PageProps) {
   };
   const currentPage = Number(page || 1);
   const books = await getBooks(currentPage);
-  const pagination = [];
-  for (let i = books.startIndex; i < books.startIndex + 10; i++) {
-    pagination.push(i);
-  }
   return (
     <section className="w-4/5 max-w-[1200px] mx-auto mt-4 border-primary-200 border-t-1">
       <div className="flex mt-8 gap-8">
@@ -68,14 +64,15 @@ export default async function ListPage({ params, searchParams }: PageProps) {
             </p>
           )}
           <BookList books={books} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={books.totalResults}
+            currentType={type}
+            currentCategory={categoryId}
+            currentKeyword={keyword}
+          />
         </div>
       </div>
-      <Pagination
-        pagination={pagination}
-        currentType={type}
-        currentCategory={categoryId}
-        currentKeyword={keyword}
-      />
     </section>
   );
 }

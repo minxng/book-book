@@ -1,7 +1,7 @@
 const BASE_URL = "http://www.aladin.co.kr/ttb/api";
 const API_KEY = process.env.NEXT_PUBLIC_ALADIN_API_KEY;
 
-export async function getBestSeller(page: number, categoryId?: number) {
+export async function getBestSeller(page?: number, categoryId?: number) {
   const response = await fetch(
     `${BASE_URL}/ItemList.aspx?ttbkey=${API_KEY}&QueryType=Bestseller&CategoryId=${
       categoryId ?? 0
@@ -11,7 +11,7 @@ export async function getBestSeller(page: number, categoryId?: number) {
   return json;
 }
 
-export async function getNewBooks(page: number) {
+export async function getNewBooks(page?: number) {
   const response = await fetch(
     `${BASE_URL}/ItemList.aspx?ttbkey=${API_KEY}&QueryType=ItemNewSpecial&MaxResults=10&start=${page}&SearchTarget=Book&output=JS&Cover=Big&Version=20131101`
   );
@@ -19,7 +19,7 @@ export async function getNewBooks(page: number) {
   return json;
 }
 
-export async function getRecommendBooks(page: number) {
+export async function getRecommendBooks(page?: number) {
   const response = await fetch(
     `${BASE_URL}/ItemList.aspx?ttbkey=${API_KEY}&QueryType=ItemEditorChoice&MaxResults=10&start=${page}&SearchTarget=Book&CategoryId=50930&output=JS&Cover=Big&Version=20131101`
   );
