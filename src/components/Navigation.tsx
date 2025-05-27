@@ -40,10 +40,10 @@ export default function Navigation() {
           />
         </form>
       </div>
-      <div className="flex items-center gap-2 cursor-pointer" onClick={login}>
+      <Link href={"/login"} className="flex items-center gap-2 cursor-pointer">
         <BsPersonCircle size={30} className="text-primary" />
         로그인
-      </div>
+      </Link>
     </nav>
   );
 }
