@@ -1,5 +1,3 @@
-import Footer from "@/components/Footer";
-import Navigation from "@/components/Navigation";
 import type { Metadata } from "next";
 import { Noto_Sans_KR, Roboto } from "next/font/google";
 import "./globals.css";
@@ -29,9 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${notoSansKR.variable} ${roboto.variable} antialiased`}>
-        <Navigation />
         {children}
-        <Footer />
       </body>
     </html>
   );
