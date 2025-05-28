@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -18,10 +19,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-export const createUser = (email: string, password: string) => {
+export const createUser = (email: string, password: string, name: string) => {
   createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {})
-    .catch(() => {});
+    .then((userCredential) => {
+      const user = userCredential.user;
+      updateProfile(user, {
+        displayName: name,
+      })
+        .then(() => {
+          signIn(email, password);
+          const router = useRouter();
+          router.push("/");
+        })
+        .catch(() => {
+          alert("회원가입에 실패했습니다");
+        });
+    })
+    .catch((e) => {
+      console.log(e, "sign up errorr");
+    });
 };
 
 export const signIn = (email: string, password: string) => {
