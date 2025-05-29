@@ -1,7 +1,10 @@
 "use client";
 import Input from "@/components/Input";
 import { createUser } from "@/lib/api/firebase";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
+import logo from "../../../public/logo.png";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -13,6 +16,9 @@ export default function SignUp() {
   };
   return (
     <section className="w-96 mx-auto">
+      <Link href="/">
+        <Image src={logo} alt="logo" width={300} className="mx-auto my-16" />
+      </Link>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <label>이름</label>
         <Input type="text" onChange={setName} />
@@ -23,7 +29,13 @@ export default function SignUp() {
         </div>
         <label htmlFor="">비밀번호</label>
         <Input type="password" onChange={setPassword} />
-        <button type="submit">회원가입</button>
+        <span>6자 이상</span>
+        <button
+          type="submit"
+          className="w-full p-3 bg-primary-200 rounded mt-2 cursor-pointer"
+        >
+          회원가입
+        </button>
       </form>
     </section>
   );

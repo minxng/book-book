@@ -15,7 +15,9 @@ export default function Login() {
   };
   return (
     <section className="w-96 mx-auto">
-      <Image src={logo} alt="logo" width={300} className="mx-auto p-16" />
+      <Link href="/">
+        <Image src={logo} alt="logo" width={300} className="mx-auto my-16" />
+      </Link>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <Input
           type="text"
