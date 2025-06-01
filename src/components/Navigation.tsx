@@ -31,7 +31,7 @@ export default function Navigation() {
       </h1>
       <div className="border-emerald-800 border-1 p-2 rounded-2xl flex items-center  w-1/2">
         <BiSearch size={24} className="text-primary" />
-        <form action="" onSubmit={handleOnSubmit}>
+        <form onSubmit={handleOnSubmit} className="w-full">
           <input
             type="text"
             value={keyword}
