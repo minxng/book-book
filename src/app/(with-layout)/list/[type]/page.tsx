@@ -23,7 +23,6 @@ interface PageProps {
 export default async function ListPage({ params, searchParams }: PageProps) {
   const { type } = await params;
   const { keyword, categoryId, page } = await searchParams;
-
   const getBooks = async (page: number) => {
     if (type === "bestSeller") {
       return await getBestSeller(page, categoryId);
@@ -63,6 +62,11 @@ export default async function ListPage({ params, searchParams }: PageProps) {
               결과 총 {books.totalResults}건
             </p>
           )}
+          <p className="mb-8 font-bold text-lg">
+            {type === "bestSeller" && "베스트셀러"}
+            {type === "newBook" && "이달의 신작도서"}
+            {type === "recommendBook" && "이달의 추천도서"}
+          </p>
           <BookList books={books} />
           <Pagination
             currentPage={currentPage}
