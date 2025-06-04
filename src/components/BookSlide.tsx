@@ -55,14 +55,14 @@ export default function BookSlide({ books, title, type }: Book) {
                   sizes="true"
                 />
               </div>
-              <p className="text-ellipsis line-clamp-2 mt-4">
+              <div className="flex mt-4 gap-1">
                 {book.bestRank && (
-                  <span className="px-2 py-1 mr-1 bg-amber-200 text-center rounded">
+                  <p className="w-6 h-6 bg-primary-300 text-center rounded flex items-center justify-center shrink-0">
                     {book.bestRank}
-                  </span>
+                  </p>
                 )}
-                {book.title}
-              </p>
+                <p className="text-ellipsis line-clamp-2">{book.title}</p>
+              </div>
             </Link>
           </SwiperSlide>
         ))}
