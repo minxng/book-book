@@ -51,10 +51,13 @@ export default function Navigation() {
       </div>
       {user ? (
         <div className="flex items-center gap-4">
-          <p className="flex items-center gap-2 cursor-pointer">
+          <Link
+            href="/my-book"
+            className="flex items-center gap-2 cursor-pointer"
+          >
             <BsPersonCircle size={30} className="text-primary" />
             {user.displayName}님
-          </p>
+          </Link>
           <button className="cursor-pointer" onClick={signOut}>
             {" "}
             로그아웃
