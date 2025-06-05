@@ -18,7 +18,9 @@ export default function Login() {
       router.push("/");
     }
     if (!result.success) {
-      console.log(result);
+      alert(
+        "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다."
+      );
     }
   };
   return (
