@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuth } from "@/hooks/useAuth";
+import { signOutUser } from "@/lib/api/firebase";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -12,6 +14,8 @@ export default function Navigation() {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
   const pathname = usePathname();
+  const { user, loading } = useAuth();
+  console.log(user, loading, "check");
   useEffect(() => {
     if (!pathname.startsWith("/list/search")) {
       setKeyword("");
@@ -40,10 +44,19 @@ export default function Navigation() {
           />
         </form>
       </div>
-      <Link href={"/login"} className="flex items-center gap-2 cursor-pointer">
-        <BsPersonCircle size={30} className="text-primary" />
-        로그인
-      </Link>
+      {user ? (
+        <div>
+          {user.displayName}님<button onClick={signOutUser}> 로그아웃</button>
+        </div>
+      ) : (
+        <Link
+          href={"/login"}
+          className="flex items-center gap-2 cursor-pointer"
+        >
+          <BsPersonCircle size={30} className="text-primary" />
+          로그인
+        </Link>
+      )}
     </nav>
   );
 }

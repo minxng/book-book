@@ -1,8 +1,9 @@
-import { initializeApp } from "firebase/app";
+import { FirebaseError, initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 
@@ -17,33 +18,45 @@ const firebaseConfig = {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const app = initializeApp(firebaseConfig);
-const auth = getAuth();
+export const auth = getAuth();
 
-export const createUser = (email: string, password: string, name: string) => {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      updateProfile(user, {
-        displayName: name,
-      })
-        .then(() => {
-          signIn(email, password);
-          const router = useRouter();
-          router.push("/");
-        })
-        .catch(() => {
-          alert("회원가입에 실패했습니다");
-        });
-    })
-    .catch((e) => {
-      console.log(e, "sign up errorr");
+export const createUser = async (
+  email: string,
+  password: string,
+  name: string
+) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    await updateProfile(user, {
+      displayName: name,
     });
+    return { success: true };
+  } catch (error: unknown) {
+    if (error instanceof FirebaseError) {
+      return { success: false, error: error.code };
+    }
+    return { success: false, error: "unknown-error" };
+  }
 };
 
-export const signIn = (email: string, password: string) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((v) => {
-      console.log(v);
-    })
-    .catch(() => {});
+export const signIn = async (email: string, password: string) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    return { success: true, user: userCredential.user };
+  } catch {
+    return { success: false };
+  }
+};
+
+export const signOutUser = () => {
+  signOut(auth);
 };
