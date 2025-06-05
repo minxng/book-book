@@ -26,6 +26,11 @@ export default function Navigation() {
     if (!keyword) return;
     router.push(`/list/search?keyword=${keyword}`);
   };
+  const signOut = () => {
+    if (confirm("로그아웃 하시겠습니까?")) {
+      signOutUser();
+    }
+  };
   return (
     <nav className="flex max-w-[1200px] w-4/5 mx-auto my-0 py-4 gap-10 items-center justify-between">
       <h1>
@@ -45,8 +50,15 @@ export default function Navigation() {
         </form>
       </div>
       {user ? (
-        <div>
-          {user.displayName}님<button onClick={signOutUser}> 로그아웃</button>
+        <div className="flex items-center gap-4">
+          <p className="flex items-center gap-2 cursor-pointer">
+            <BsPersonCircle size={30} className="text-primary" />
+            {user.displayName}님
+          </p>
+          <button className="cursor-pointer" onClick={signOut}>
+            {" "}
+            로그아웃
+          </button>
         </div>
       ) : (
         <Link
