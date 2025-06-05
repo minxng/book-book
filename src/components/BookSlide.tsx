@@ -38,7 +38,7 @@ export default function BookSlide({ books, title, type }: Book) {
       <Swiper
         loop={true}
         slidesPerView={5}
-        spaceBetween={50}
+        spaceBetween={20}
         autoplay={{
           delay: 3000,
         }}
