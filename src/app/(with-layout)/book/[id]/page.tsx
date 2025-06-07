@@ -1,3 +1,4 @@
+import WishButton from "@/components/WishButton";
 import { getBookDetail } from "@/lib/api/aladin";
 import Image from "next/image";
 
@@ -23,6 +24,7 @@ export default async function BookDetail({
           <span>{book.subTitle}</span>
           <span>{book.author}</span>
         </div>
+        <WishButton book={book} />
       </div>
     </section>
   );

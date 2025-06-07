@@ -6,6 +6,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -14,10 +15,12 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const app = initializeApp(firebaseConfig);
+const db = getDatabase();
 export const auth = getAuth();
 
 export const createUser = async (
@@ -59,4 +62,14 @@ export const signIn = async (email: string, password: string) => {
 
 export const signOutUser = () => {
   signOut(auth);
+};
+
+export const addWishList = (id: string, title: string, cover: string) => {
+  const user = auth.currentUser;
+  const userId = user?.uid;
+  set(ref(db, `users/${userId}/wishList/${id}`), {
+    title,
+    id,
+    cover,
+  });
 };
