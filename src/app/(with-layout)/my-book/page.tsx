@@ -1,3 +1,8 @@
+import WishList from "@/components/WishList";
 export default async function MyBook() {
-  return <div></div>;
+  return (
+    <div>
+      <WishList />
+    </div>
+  );
 }

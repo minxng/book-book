@@ -6,7 +6,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, onValue, ref, set } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -71,5 +71,23 @@ export const addWishList = (id: string, title: string, cover: string) => {
     title,
     id,
     cover,
+  });
+};
+
+export const getWishList = () => {
+  const user = auth.currentUser;
+  const userId = user?.uid;
+  const wishListRef = ref(db, `users/${userId}/wishList`);
+  return new Promise((resolve, reject) => {
+    onValue(
+      wishListRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        resolve(data);
+      },
+      (error) => {
+        reject(error);
+      }
+    );
   });
 };
