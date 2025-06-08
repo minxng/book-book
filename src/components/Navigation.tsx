@@ -14,8 +14,7 @@ export default function Navigation() {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
   const pathname = usePathname();
-  const { user, loading } = useAuth();
-  console.log(user, loading, "check");
+  const { user } = useAuth();
   useEffect(() => {
     if (!pathname.startsWith("/list/search")) {
       setKeyword("");
