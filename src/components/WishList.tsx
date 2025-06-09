@@ -11,19 +11,23 @@ type WishListItem = {
 
 export default function WishList() {
   const user = useAuth();
-  const [wishList, setWishList] = useState<Record<string, WishListItem> | null>(
-    null
-  );
+  const [wishList, setWishList] = useState<WishListItem[]>([]);
   useEffect(() => {
     if (user) {
       getWishList()
         .then((data) => {
-          setWishList(data as Record<string, WishListItem> | null);
+          setWishList(data as WishListItem[]);
         })
         .catch((error) => {
           console.error(error);
         });
     }
   }, [user]);
-  return <section>{JSON.stringify(wishList)}</section>;
+  return (
+    <ul>
+      {wishList.map((book) => (
+        <li key={book.id}>{book.title}</li>
+      ))}
+    </ul>
+  );
 }

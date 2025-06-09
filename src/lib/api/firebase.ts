@@ -83,7 +83,7 @@ export const getWishList = () => {
       wishListRef,
       (snapshot) => {
         const data = snapshot.val();
-        resolve(data);
+        resolve(Object.values(data));
       },
       (error) => {
         reject(error);
