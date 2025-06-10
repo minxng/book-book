@@ -11,7 +11,7 @@ export default async function Home() {
   const newBooks = await getNewBooks();
   const recommendBooks = await getRecommendBooks();
   return (
-    <div className="w-4/5 max-w-[1200px] mx-auto my-0">
+    <div className="container-style my-0">
       <Banner />
       <BookSlide
         books={recommendBooks}

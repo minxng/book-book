@@ -10,7 +10,7 @@ export default async function BookDetail({
   const { id } = await params;
   const book = await getBookDetail(id);
   return (
-    <section className="w-4/5 max-w-[1200px] mx-auto mt-8">
+    <section className="container-style mt-8">
       <h3 className="text-xl mb-4">{book.title}</h3>
       <div className="flex">
         <Image
