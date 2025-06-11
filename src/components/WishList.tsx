@@ -7,6 +7,7 @@ type WishListItem = {
   id: string;
   title: string;
   cover: string;
+  link: string;
 };
 
 export default function WishList() {

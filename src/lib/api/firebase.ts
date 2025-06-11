@@ -64,13 +64,19 @@ export const signOutUser = () => {
   signOut(auth);
 };
 
-export const addWishList = (id: string, title: string, cover: string) => {
+export const addWishList = (
+  id: string,
+  title: string,
+  cover: string,
+  link: string
+) => {
   const user = auth.currentUser;
   const userId = user?.uid;
   set(ref(db, `users/${userId}/wishList/${id}`), {
     title,
     id,
     cover,
+    link,
   });
 };
 
