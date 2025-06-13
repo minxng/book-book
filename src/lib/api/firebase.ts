@@ -64,7 +64,7 @@ export const signOutUser = () => {
   signOut(auth);
 };
 
-export const addWishList = (
+export const addWishList = async (
   id: string,
   title: string,
   cover: string,
@@ -72,12 +72,17 @@ export const addWishList = (
 ) => {
   const user = auth.currentUser;
   const userId = user?.uid;
-  set(ref(db, `users/${userId}/wishList/${id}`), {
-    title,
-    id,
-    cover,
-    link,
-  });
+  try {
+    await set(ref(db, `users/${userId}/wishList/${id}`), {
+      title,
+      id,
+      cover,
+      link,
+    });
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error };
+  }
 };
 
 type WishListItem = {
