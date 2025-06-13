@@ -32,19 +32,21 @@ export default function WishList() {
     removeWishListItem(id);
   };
   return (
-    <ul className="flex flex-wrap">
+    <ul className="grid grid-cols-5 gap-8">
       {wishList.map((book) => (
-        <li key={book.id} className="w-1/5">
-          <Image
-            src={book.cover.replace("coversum", "cover500")}
-            alt="표지"
-            width={200}
-            height={200}
-          />
-          {book.title}
+        <li key={book.id}>
+          <div className="relative w-full aspect-[2/3]">
+            <Image
+              src={book.cover.replace("coversum", "cover500")}
+              alt="표지"
+              fill
+              className="object-contain"
+            />
+          </div>
+          <p className="overflow-ellipsis line-clamp-1">{book.title}</p>
           <div className="flex">
             <button className="flex items-center gap-2 border-1 border-primary-200 p-3 rounded">
-              리뷰 작성
+              리뷰
               <FaPencilAlt />
             </button>
             <button
