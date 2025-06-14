@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
+import ReviewModal from "./ReviewModal";
 
 type WishListItem = {
   id: string;
@@ -16,6 +17,7 @@ type WishListItem = {
 export default function WishList() {
   const user = useAuth();
   const [wishList, setWishList] = useState<WishListItem[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
     if (!user) return;
     const unsubscribe = subscribeToWishList((data) => {
@@ -31,40 +33,54 @@ export default function WishList() {
   const deleteItem = (id: string) => {
     removeWishListItem(id);
   };
+  const handleReviewSubmit = (review: string) => {
+    console.log(review);
+  };
   return (
-    <ul className="grid grid-cols-5 gap-8">
-      {wishList.map((book) => (
-        <li key={book.id}>
-          <div className="relative w-full aspect-[2/3]">
-            <Image
-              src={book.cover.replace("coversum", "cover500")}
-              alt="표지"
-              fill
-              className="object-contain"
-            />
-          </div>
-          <p className="overflow-ellipsis line-clamp-1">{book.title}</p>
-          <div className="flex">
-            <button className="flex items-center gap-2 border-1 border-primary-200 p-3 rounded">
-              리뷰
-              <FaPencilAlt />
-            </button>
-            <button
-              onClick={() => openLink(book.link)}
-              className="flex items-center gap-2 border-1 border-primary-200 p-3 rounded cursor-pointer"
-            >
-              구매
-              <FiExternalLink />
-            </button>
-            <button
-              onClick={() => deleteItem(book.id)}
-              className="border-1 border-primary-200 p-3 rounded cursor-pointer"
-            >
-              <FaRegTrashAlt />
-            </button>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ReviewModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleReviewSubmit}
+      />
+      <ul className="grid grid-cols-5 gap-8">
+        {wishList.map((book) => (
+          <li key={book.id}>
+            <div className="relative w-full aspect-[2/3] group">
+              <Image
+                src={book.cover.replace("coversum", "cover500")}
+                alt="표지"
+                fill
+                className="object-contain group-hover:opacity-40"
+              />
+            </div>
+            <p className="overflow-ellipsis line-clamp-1">{book.title}</p>
+            <div className="flex">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="flex items-center gap-2 border-1 border-primary-200 p-3 rounded"
+              >
+                리뷰
+                <FaPencilAlt />
+              </button>
+
+              <button
+                onClick={() => openLink(book.link)}
+                className="flex items-center gap-2 border-1 border-primary-200 p-3 rounded cursor-pointer"
+              >
+                구매
+                <FiExternalLink />
+              </button>
+              <button
+                onClick={() => deleteItem(book.id)}
+                className="border-1 border-primary-200 p-3 rounded cursor-pointer"
+              >
+                <FaRegTrashAlt />
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
