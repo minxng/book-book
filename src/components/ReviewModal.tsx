@@ -1,25 +1,38 @@
 "use client";
 import { useState } from "react";
 import Modal from "./Modal";
-
+type WishListItem = {
+  id: string;
+  title: string;
+  cover: string;
+  link: string;
+};
 export default function ReviewModal({
   isOpen,
   onClose,
   onSubmit,
+  book,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (review: string) => void;
+  onSubmit: (id: string, review: string, rating: number) => void;
+  book: WishListItem;
 }) {
+  const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const handleSave = () => {
-    onSubmit(review);
+    const id = book.id;
+    onSubmit(id, review, rating);
     setReview("");
     onClose();
   };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <h2 className="text-lg font-bold mb-2">리뷰 작성</h2>
+      <h2 className="text-lg font-bold mb-2">{book.title}</h2>
+      <input
+        type="number"
+        onChange={(e) => setRating(Number(e.target.value))}
+      />
       <textarea
         className="w-full border p-2 rounded resize-none h-24"
         value={review}

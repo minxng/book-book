@@ -1,6 +1,10 @@
 "use client";
 import { useAuth } from "@/hooks/useAuth";
-import { removeWishListItem, subscribeToWishList } from "@/lib/api/firebase";
+import {
+  removeWishListItem,
+  subscribeToWishList,
+  writeReview,
+} from "@/lib/api/firebase";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
@@ -18,6 +22,7 @@ export default function WishList() {
   const user = useAuth();
   const [wishList, setWishList] = useState<WishListItem[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedBook, setSelectedBook] = useState<WishListItem | null>(null);
   useEffect(() => {
     if (!user) return;
     const unsubscribe = subscribeToWishList((data) => {
@@ -33,16 +38,23 @@ export default function WishList() {
   const deleteItem = (id: string) => {
     removeWishListItem(id);
   };
-  const handleReviewSubmit = (review: string) => {
-    console.log(review);
+  const openReviewModal = (book: WishListItem) => {
+    setSelectedBook(book);
+    setIsModalOpen(true);
+  };
+  const handleReviewSubmit = (id: string, review: string, rating: number) => {
+    writeReview(id, review, rating);
   };
   return (
     <>
-      <ReviewModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleReviewSubmit}
-      />
+      {selectedBook && (
+        <ReviewModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleReviewSubmit}
+          book={selectedBook}
+        />
+      )}
       <ul className="grid grid-cols-5 gap-8">
         {wishList.map((book) => (
           <li key={book.id}>
@@ -57,7 +69,7 @@ export default function WishList() {
             <p className="overflow-ellipsis line-clamp-1">{book.title}</p>
             <div className="flex">
               <button
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => openReviewModal(book)}
                 className="flex items-center gap-2 border-1 border-primary-200 p-3 rounded"
               >
                 리뷰

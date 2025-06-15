@@ -6,7 +6,15 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { getDatabase, off, onValue, ref, remove, set } from "firebase/database";
+import {
+  getDatabase,
+  off,
+  onValue,
+  push,
+  ref,
+  remove,
+  set,
+} from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -22,6 +30,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 export const auth = getAuth();
+const user = auth.currentUser;
+const userId = user?.uid;
 
 export const createUser = async (
   email: string,
@@ -70,8 +80,6 @@ export const addWishList = async (
   cover: string,
   link: string
 ) => {
-  const user = auth.currentUser;
-  const userId = user?.uid;
   try {
     await set(ref(db, `users/${userId}/wishList/${id}`), {
       title,
@@ -95,8 +103,6 @@ type WishListItem = {
 export const subscribeToWishList = (
   callback: (items: WishListItem[]) => void
 ) => {
-  const user = auth.currentUser;
-  const userId = user?.uid;
   if (!userId) return () => {};
   const wishListRef = ref(db, `users/${userId}/wishList`);
   onValue(wishListRef, (snapshot) => {
@@ -108,7 +114,19 @@ export const subscribeToWishList = (
 };
 
 export const removeWishListItem = (id: string) => {
-  const user = auth.currentUser;
-  const userId = user?.uid;
   remove(ref(db, `users/${userId}/wishList/${id}`));
+};
+
+export const writeReview = (id: string, review: string, rating: number) => {
+  if (rating) {
+    set(ref(db, `users/${userId}/reviews/${id}/rating`), {
+      rating,
+    });
+  }
+  if (review) {
+    push(ref(db, `users/${userId}/reviews/${id}/comments`), {
+      review,
+      createdAt: Date.now(),
+    });
+  }
 };
