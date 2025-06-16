@@ -30,8 +30,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 export const auth = getAuth();
-const user = auth.currentUser;
-const userId = user?.uid;
 
 export const createUser = async (
   email: string,
@@ -80,6 +78,8 @@ export const addWishList = async (
   cover: string,
   link: string
 ) => {
+  const user = auth.currentUser;
+  const userId = user?.uid;
   try {
     await set(ref(db, `users/${userId}/wishList/${id}`), {
       title,
@@ -103,6 +103,8 @@ type WishListItem = {
 export const subscribeToWishList = (
   callback: (items: WishListItem[]) => void
 ) => {
+  const user = auth.currentUser;
+  const userId = user?.uid;
   if (!userId) return () => {};
   const wishListRef = ref(db, `users/${userId}/wishList`);
   onValue(wishListRef, (snapshot) => {
@@ -114,10 +116,14 @@ export const subscribeToWishList = (
 };
 
 export const removeWishListItem = (id: string) => {
+  const user = auth.currentUser;
+  const userId = user?.uid;
   remove(ref(db, `users/${userId}/wishList/${id}`));
 };
 
 export const writeReview = (id: string, review: string, rating: number) => {
+  const user = auth.currentUser;
+  const userId = user?.uid;
   if (rating) {
     set(ref(db, `users/${userId}/reviews/${id}/rating`), {
       rating,
