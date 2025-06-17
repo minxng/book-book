@@ -121,13 +121,27 @@ export const removeWishListItem = (id: string) => {
   remove(ref(db, `users/${userId}/wishList/${id}`));
 };
 
-export const writeReview = (id: string, review: string, rating: number) => {
-  const user = auth.currentUser;
-  const userId = user?.uid;
-  if (rating) {
-    set(ref(db, `users/${userId}/reviews/${id}/rating`), {
+export const writeReview = async (
+  id: string,
+  title: string,
+  cover: string,
+  review: string,
+  rating: number
+) => {
+  const userId = getUserId();
+  const reviewRef = ref(db, `users/${userId}/reviews/${id}`);
+  const snapshot = await get(reviewRef);
+  const exists = snapshot.exists();
+  if (!exists) {
+    await set(reviewRef, {
+      title,
+      cover,
       rating,
+      comments: {},
     });
+  }
+  if (rating) {
+    set(ref(db, `users/${userId}/reviews/${id}/rating`), rating);
   }
   if (review) {
     push(ref(db, `users/${userId}/reviews/${id}/comments`), {

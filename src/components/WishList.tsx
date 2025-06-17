@@ -18,6 +18,14 @@ type WishListItem = {
   link: string;
 };
 
+type ReviewItem = {
+  id: string;
+  title: string;
+  cover: string;
+  review: string;
+  rating: number;
+};
+
 export default function WishList() {
   const user = useAuth();
   const [wishList, setWishList] = useState<WishListItem[]>([]);
@@ -42,8 +50,14 @@ export default function WishList() {
     setSelectedBook(book);
     setIsModalOpen(true);
   };
-  const handleReviewSubmit = (id: string, review: string, rating: number) => {
-    writeReview(id, review, rating);
+  const handleReviewSubmit = ({
+    id,
+    title,
+    cover,
+    review,
+    rating,
+  }: ReviewItem) => {
+    writeReview(id, title, cover, review, rating);
   };
   return (
     <>

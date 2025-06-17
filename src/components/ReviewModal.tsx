@@ -7,6 +7,14 @@ type WishListItem = {
   cover: string;
   link: string;
 };
+type ReviewItem = {
+  id: string;
+  title: string;
+  cover: string;
+  review: string;
+  rating: number;
+};
+
 export default function ReviewModal({
   isOpen,
   onClose,
@@ -15,14 +23,16 @@ export default function ReviewModal({
 }: {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (id: string, review: string, rating: number) => void;
+  onSubmit: ({ id, title, cover, review, rating }: ReviewItem) => void;
   book: WishListItem;
 }) {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const handleSave = () => {
     const id = book.id;
-    onSubmit(id, review, rating);
+    const title = book.title;
+    const cover = book.cover;
+    onSubmit({ id, title, cover, review, rating });
     setReview("");
     onClose();
   };
