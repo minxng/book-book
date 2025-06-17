@@ -7,6 +7,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import {
+  get,
   getDatabase,
   off,
   onValue,
@@ -30,6 +31,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 export const auth = getAuth();
+const getUserId = () => auth.currentUser?.uid;
 
 export const createUser = async (
   email: string,
@@ -78,8 +80,7 @@ export const addWishList = async (
   cover: string,
   link: string
 ) => {
-  const user = auth.currentUser;
-  const userId = user?.uid;
+  const userId = getUserId();
   try {
     await set(ref(db, `users/${userId}/wishList/${id}`), {
       title,
@@ -103,8 +104,7 @@ type WishListItem = {
 export const subscribeToWishList = (
   callback: (items: WishListItem[]) => void
 ) => {
-  const user = auth.currentUser;
-  const userId = user?.uid;
+  const userId = getUserId();
   if (!userId) return () => {};
   const wishListRef = ref(db, `users/${userId}/wishList`);
   onValue(wishListRef, (snapshot) => {
@@ -116,8 +116,7 @@ export const subscribeToWishList = (
 };
 
 export const removeWishListItem = (id: string) => {
-  const user = auth.currentUser;
-  const userId = user?.uid;
+  const userId = getUserId();
   remove(ref(db, `users/${userId}/wishList/${id}`));
 };
 
