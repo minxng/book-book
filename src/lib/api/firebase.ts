@@ -173,3 +173,8 @@ export const writeReview = async (
     });
   }
 };
+
+export const deleteReview = (bookId: string, commentId: string) => {
+  const userId = getUserId();
+  remove(ref(db, `users/${userId}/reviews/${bookId}/comments/${commentId}`));
+};

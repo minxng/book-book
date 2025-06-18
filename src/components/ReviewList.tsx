@@ -27,6 +27,9 @@ export default function ReviewList() {
       unsubscribe();
     };
   }, [user]);
+  const deleteReviewItem = (bookId: string, commentId: string) => {
+    deleteReview(bookId, commentId);
+  };
   return (
     <ul className="mt-4">
       {reviewList &&
@@ -41,7 +44,7 @@ export default function ReviewList() {
                 {book.rating}
                 <FaRegStar />
               </p>
-              {Object.values(book.comments).map((comment) => (
+              {Object.entries(book.comments).map(([commentKey, comment]) => (
                 <div
                   className="bg-primary-200 rounded-xl p-4 w-full my-3 flex justify-between"
                   key={comment.createdAt}
@@ -51,7 +54,10 @@ export default function ReviewList() {
                     <button className="p-3 rounded cursor-pointer">
                       <FaPencilAlt />
                     </button>
-                    <button className="p-3 rounded cursor-pointer">
+                    <button
+                      onClick={() => deleteReviewItem(book.id, commentKey)}
+                      className="p-3 rounded cursor-pointer"
+                    >
                       <FaRegTrashAlt />
                     </button>
                   </div>
