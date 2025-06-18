@@ -12,14 +12,9 @@ interface BookProps {
 }
 
 export default function WishButton({ book }: BookProps) {
-  console.log(book, "book");
   const handleOnClick = async () => {
-    const result = await addWishList(
-      book.itemId,
-      book.title,
-      book.cover,
-      book.link
-    );
+    const cover = book.cover.replace("coversum", "cover500");
+    const result = await addWishList(book.itemId, book.title, cover, book.link);
     if (result.success) {
       alert("성공");
     } else {

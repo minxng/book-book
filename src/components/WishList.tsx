@@ -74,7 +74,7 @@ export default function WishList() {
           <li key={book.id}>
             <div className="relative w-full aspect-[2/3] group">
               <Image
-                src={book.cover.replace("coversum", "cover500")}
+                src={book.cover}
                 alt="표지"
                 fill
                 className="object-contain group-hover:opacity-40"
