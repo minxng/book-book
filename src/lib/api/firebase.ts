@@ -101,6 +101,15 @@ type WishListItem = {
   link: string;
 };
 
+type ReviewItem = {
+  id: string;
+  title: string;
+  cover: string;
+  review: string;
+  rating: number;
+  comments: [];
+};
+
 export const subscribeToWishList = (
   callback: (items: WishListItem[]) => void
 ) => {
@@ -120,6 +129,20 @@ export const removeWishListItem = (id: string) => {
   remove(ref(db, `users/${userId}/wishList/${id}`));
 };
 
+export const subscribeToReviewList = (
+  callback: (items: ReviewItem[]) => void
+) => {
+  const userId = getUserId();
+  if (!userId) return () => {};
+  const reviewListRef = ref(db, `users/${userId}/reviews`);
+  onValue(reviewListRef, (snapshot) => {
+    const data = snapshot.val();
+    const list = data ? Object.values(data) : [];
+    callback(list as ReviewItem[]);
+  });
+  return () => off(reviewListRef);
+};
+
 export const writeReview = async (
   id: string,
   title: string,
@@ -133,6 +156,7 @@ export const writeReview = async (
   const exists = snapshot.exists();
   if (!exists) {
     await set(reviewRef, {
+      id,
       title,
       cover,
       rating,
