@@ -15,6 +15,7 @@ import {
   ref,
   remove,
   set,
+  update,
 } from "firebase/database";
 
 const firebaseConfig = {
@@ -93,6 +94,10 @@ export const addWishList = async (
     return { success: false, error: error };
   }
 };
+interface CommentType {
+  createdAt: number;
+  review: string;
+}
 
 type WishListItem = {
   id: string;
@@ -107,7 +112,9 @@ type ReviewItem = {
   cover: string;
   review: string;
   rating: number;
-  comments: [];
+  comments?: {
+    [key: string]: CommentType;
+  };
 };
 
 export const subscribeToWishList = (
@@ -143,17 +150,18 @@ export const subscribeToReviewList = (
   return () => off(reviewListRef);
 };
 
-export const writeReview = async (
-  id: string,
-  title: string,
-  cover: string,
-  review: string,
-  rating: number
-) => {
+export const writeReview = async ({
+  id,
+  title,
+  cover,
+  review,
+  rating,
+}: ReviewItem) => {
   const userId = getUserId();
   const reviewRef = ref(db, `users/${userId}/reviews/${id}`);
   const snapshot = await get(reviewRef);
   const exists = snapshot.exists();
+
   if (!exists) {
     await set(reviewRef, {
       id,
@@ -172,6 +180,27 @@ export const writeReview = async (
       createdAt: Date.now(),
     });
   }
+};
+
+export const updateReview = ({
+  bookId,
+  commentId,
+  review,
+  rating,
+}: {
+  bookId: string;
+  commentId: string;
+  review: string;
+  rating: number;
+}) => {
+  const userId = getUserId();
+  if (rating) {
+    update(ref(db, `users/${userId}/reviews/${bookId}`), { rating: rating });
+  }
+  update(ref(db, `users/${userId}/reviews/${bookId}/comments/${commentId}`), {
+    review,
+    createdAt: Date.now(),
+  });
 };
 
 export const deleteReview = (bookId: string, commentId: string) => {

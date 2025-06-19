@@ -57,7 +57,7 @@ export default function WishList() {
     review,
     rating,
   }: ReviewItem) => {
-    writeReview(id, title, cover, review, rating);
+    writeReview({ id, title, cover, review, rating });
   };
   return (
     <>

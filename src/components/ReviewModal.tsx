@@ -1,6 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FaRegStar } from "react-icons/fa";
 import Modal from "./Modal";
+
 type WishListItem = {
   id: string;
   title: string;
@@ -20,14 +22,28 @@ export default function ReviewModal({
   onClose,
   onSubmit,
   book,
+  existingReview,
 }: {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: ({ id, title, cover, review, rating }: ReviewItem) => void;
-  book: WishListItem;
+  book: WishListItem | ReviewItem;
+  comment?: string;
+  existingReview?: { review: string; rating: number };
 }) {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
+
+  useEffect(() => {
+    if (isOpen && existingReview) {
+      setReview(existingReview.review ?? "");
+      setRating(existingReview.rating ?? 0);
+    }
+    if (!isOpen) {
+      setReview("");
+      setRating(0);
+    }
+  }, [isOpen, existingReview]);
   const handleSave = () => {
     const id = book.id;
     const title = book.title;
@@ -39,8 +55,10 @@ export default function ReviewModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <h2 className="text-lg font-bold mb-2">{book.title}</h2>
+      <FaRegStar size={40} />
       <input
         type="number"
+        value={rating}
         onChange={(e) => setRating(Number(e.target.value))}
       />
       <textarea

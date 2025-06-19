@@ -1,23 +1,43 @@
 import { useAuth } from "@/hooks/useAuth";
-import { subscribeToReviewList } from "@/lib/api/firebase";
+import {
+  deleteReview,
+  subscribeToReviewList,
+  updateReview,
+  writeReview,
+} from "@/lib/api/firebase";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaPencilAlt, FaRegStar, FaRegTrashAlt } from "react-icons/fa";
-type CommentType = {
+import ReviewModal from "./ReviewModal";
+
+interface CommentType {
   createdAt: number;
   review: string;
-};
-type ReviewItem = {
+}
+
+interface ReviewItem {
   id: string;
   title: string;
   cover: string;
   review: string;
   rating: number;
-  comments: CommentType[];
-};
+  comments?: {
+    [key: string]: CommentType;
+  };
+}
+
 export default function ReviewList() {
   const user = useAuth();
   const [reviewList, setReviewList] = useState<ReviewItem[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedBook, setSelectedBook] = useState<ReviewItem | null>(null);
+  const [selectedReview, setSelectedReview] = useState({
+    review: "",
+    rating: 0,
+  });
+  const [commentId, setCommentId] = useState("");
+  const [isUpdate, setIsUpdate] = useState(false);
+
   useEffect(() => {
     if (!user) return;
     const unsubscribe = subscribeToReviewList((data) => {
@@ -27,45 +47,114 @@ export default function ReviewList() {
       unsubscribe();
     };
   }, [user]);
+  const updateReviewItem = ({
+    id,
+    title,
+    cover,
+    review,
+    rating,
+  }: {
+    id: string;
+    title: string;
+    cover: string;
+    review: string;
+    rating: number;
+  }) => {
+    if (isUpdate)
+      return updateReview({ bookId: id, commentId, review, rating });
+    writeReview({ id, title, cover, review, rating });
+  };
+
+  const openReviewModal = (
+    book: ReviewItem,
+    selectedReview?: { review: string; rating: number },
+    commentId?: string
+  ) => {
+    if (commentId && selectedReview) {
+      setCommentId(commentId);
+      setSelectedReview({
+        review: selectedReview.review,
+        rating: selectedReview.rating,
+      });
+      setIsUpdate(true);
+    } else {
+      setIsUpdate(false);
+    }
+    setSelectedBook(book);
+    setIsOpen(true);
+  };
   const deleteReviewItem = (bookId: string, commentId: string) => {
     deleteReview(bookId, commentId);
   };
+  const handleCloseModal = () => {
+    setIsOpen(false);
+    setSelectedBook(null);
+    setSelectedReview({ review: "", rating: 0 });
+    setCommentId("");
+  };
   return (
-    <ul className="mt-4">
-      {reviewList &&
-        reviewList.map((book) => (
-          <li key={book.id} className="flex gap-4">
-            <div>
-              <Image src={book.cover} alt="cover" width={160} height={200} />
-            </div>
-            <div className="w-full">
-              <p className="text-xl">{book.title}</p>
-              <p className="flex items-center">
-                {book.rating}
-                <FaRegStar />
-              </p>
-              {Object.entries(book.comments).map(([commentKey, comment]) => (
-                <div
-                  className="bg-primary-200 rounded-xl p-4 w-full my-3 flex justify-between"
-                  key={comment.createdAt}
+    <>
+      {selectedBook && (
+        <ReviewModal
+          isOpen={isOpen}
+          onClose={handleCloseModal}
+          onSubmit={updateReviewItem}
+          book={selectedBook}
+          existingReview={selectedReview}
+        />
+      )}
+      <ul className="mt-4">
+        {reviewList &&
+          reviewList.map((book) => (
+            <li key={book.id} className="flex gap-4">
+              <div>
+                <Image src={book.cover} alt="cover" width={160} height={200} />
+              </div>
+              <div className="w-full">
+                <p className="text-xl">{book.title}</p>
+                <p className="flex items-center">
+                  {book.rating}
+                  <FaRegStar />
+                </p>
+                <button
+                  onClick={() => openReviewModal(book)}
+                  className="p-3 rounded cursor-pointer"
                 >
-                  <p>{comment.review}</p>
-                  <div>
-                    <button className="p-3 rounded cursor-pointer">
-                      <FaPencilAlt />
-                    </button>
-                    <button
-                      onClick={() => deleteReviewItem(book.id, commentKey)}
-                      className="p-3 rounded cursor-pointer"
+                  <FaPencilAlt />
+                </button>
+                {book.comments &&
+                  Object.entries(book.comments).map(([commentKey, comment]) => (
+                    <div
+                      className="bg-primary-200 rounded-xl p-4 w-full my-3 flex justify-between"
+                      key={comment.createdAt}
                     >
-                      <FaRegTrashAlt />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </li>
-        ))}
-    </ul>
+                      <p>{comment.review}</p>
+                      <div>
+                        <button
+                          onClick={() =>
+                            openReviewModal(
+                              book,
+                              { review: comment.review, rating: book.rating },
+                              commentKey
+                            )
+                          }
+                          className="p-3 rounded cursor-pointer"
+                        >
+                          <FaPencilAlt />
+                        </button>
+                        <button
+                          onClick={() => deleteReviewItem(book.id, commentKey)}
+                          className="p-3 rounded cursor-pointer"
+                        >
+                          <FaRegTrashAlt />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </li>
+          ))}
+      </ul>
+    </>
   );
 }
