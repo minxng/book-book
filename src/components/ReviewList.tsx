@@ -106,22 +106,33 @@ export default function ReviewList() {
       <ul className="mt-4">
         {reviewList &&
           reviewList.map((book) => (
-            <li key={book.id} className="flex gap-4">
+            <li
+              key={book.id}
+              className="flex gap-4 py-8 border-b-1 border-gray-200"
+            >
               <div>
-                <Image src={book.cover} alt="cover" width={160} height={200} />
+                <Image src={book.cover} alt="cover" width={200} height={200} />
               </div>
               <div className="w-full">
-                <p className="text-xl">{book.title}</p>
-                <p className="flex items-center">
-                  {book.rating}
-                  <FaRegStar />
-                </p>
-                <button
-                  onClick={() => openReviewModal(book)}
-                  className="p-3 rounded cursor-pointer"
-                >
-                  <FaPencilAlt />
-                </button>
+                <div className="flex justify-between">
+                  <div>
+                    <p className="text-xl">{book.title}</p>
+                    <p className="flex items-center">
+                      {book.rating}
+                      <FaRegStar />
+                      <FaRegStar />
+                      <FaRegStar />
+                      <FaRegStar />
+                      <FaRegStar />
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => openReviewModal(book)}
+                    className="p-3 rounded cursor-pointer bg-amber-100 hover:bg-amber-200"
+                  >
+                    메모 작성
+                  </button>
+                </div>
                 {book.comments &&
                   Object.entries(book.comments).map(([commentKey, comment]) => (
                     <div
