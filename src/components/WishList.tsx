@@ -7,8 +7,9 @@ import {
 } from "@/lib/api/firebase";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
+import { FaRegTrashAlt } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
+import ReviewButton from "./ReviewButton";
 import ReviewModal from "./ReviewModal";
 
 type WishListItem = {
@@ -82,14 +83,7 @@ export default function WishList() {
             </div>
             <p className="overflow-ellipsis line-clamp-1">{book.title}</p>
             <div className="flex">
-              <button
-                onClick={() => openReviewModal(book)}
-                className="flex items-center gap-2 border-1 border-primary-200 p-3 rounded"
-              >
-                리뷰
-                <FaPencilAlt />
-              </button>
-
+              <ReviewButton handleOnClick={() => openReviewModal(book)} />
               <button
                 onClick={() => openLink(book.link)}
                 className="flex items-center gap-2 border-1 border-primary-200 p-3 rounded cursor-pointer"
