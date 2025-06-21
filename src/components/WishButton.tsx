@@ -1,7 +1,6 @@
 "use client";
-
 import { addWishList } from "@/lib/api/firebase";
-
+import { FaHeart } from "react-icons/fa6";
 interface BookProps {
   book: {
     itemId: string;
@@ -10,7 +9,6 @@ interface BookProps {
     link: string;
   };
 }
-
 export default function WishButton({ book }: BookProps) {
   const handleOnClick = async () => {
     const cover = book.cover.replace("coversum", "cover500");
@@ -22,8 +20,11 @@ export default function WishButton({ book }: BookProps) {
     }
   };
   return (
-    <div onClick={handleOnClick} className="bg-amber-300 cursor-pointer">
-      <button>찜하기</button>
-    </div>
+    <button
+      onClick={handleOnClick}
+      className="flex justify-center items-center gap-1 whitespace-nowrap p-2 text-sm rounded cursor-pointer bg-blue-50 hover:bg-blue-100"
+    >
+      찜하기 <FaHeart color="orange" />
+    </button>
   );
 }

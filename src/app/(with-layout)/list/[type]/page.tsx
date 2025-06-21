@@ -40,7 +40,7 @@ export default async function ListPage({ params, searchParams }: PageProps) {
   let categoryName = "전체";
   return (
     <section className="container-style mt-4 border-primary-200 border-t-1">
-      <div className="flex mt-8 gap-8">
+      <div className="flex mt-8">
         <div className="basis-1/5">
           <p className="font-bold text-lg mb-3">분야별 베스트셀러</p>
           <ul>
