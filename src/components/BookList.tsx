@@ -8,7 +8,6 @@ import WishButton from "./WishButton";
 
 interface BookItem {
   itemId: string;
-  id: string;
   title: string;
   cover: string;
   categoryName: string;
@@ -54,7 +53,7 @@ export default function BookList({ books }: BooksProps) {
           </div>
           <div className="flex flex-col gap-2">
             <WishButton book={book} />
-            <ReviewButton book={book} />
+            <ReviewButton book={{ ...book, id: book.itemId }} />
           </div>
         </li>
       ))}
