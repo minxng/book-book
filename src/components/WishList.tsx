@@ -1,16 +1,11 @@
 "use client";
 import { useAuth } from "@/hooks/useAuth";
-import {
-  removeWishListItem,
-  subscribeToWishList,
-  writeReview,
-} from "@/lib/api/firebase";
+import { removeWishListItem, subscribeToWishList } from "@/lib/api/firebase";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 import ReviewButton from "./ReviewButton";
-import ReviewModal from "./ReviewModal";
 
 type WishListItem = {
   id: string;
@@ -19,19 +14,9 @@ type WishListItem = {
   link: string;
 };
 
-type ReviewItem = {
-  id: string;
-  title: string;
-  cover: string;
-  review: string;
-  rating: number;
-};
-
 export default function WishList() {
   const user = useAuth();
   const [wishList, setWishList] = useState<WishListItem[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedBook, setSelectedBook] = useState<WishListItem | null>(null);
   useEffect(() => {
     if (!user) return;
     const unsubscribe = subscribeToWishList((data) => {
@@ -47,66 +32,37 @@ export default function WishList() {
   const deleteItem = (id: string) => {
     removeWishListItem(id);
   };
-  const openReviewModal = (book: WishListItem) => {
-    setSelectedBook(book);
-    setIsModalOpen(true);
-  };
-  const handleReviewSubmit = ({
-    id,
-    title,
-    cover,
-    review,
-    rating,
-  }: ReviewItem) => {
-    writeReview({
-      id,
-      title,
-      cover,
-      review: review ?? "",
-      rating: rating ?? 0,
-    });
-  };
   return (
-    <>
-      {selectedBook && (
-        <ReviewModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onSubmit={handleReviewSubmit}
-          book={selectedBook}
-        />
-      )}
-      <ul className="grid grid-cols-5 gap-8">
-        {wishList.map((book) => (
-          <li key={book.id}>
-            <div className="relative w-full aspect-[2/3] group">
-              <Image
-                src={book.cover}
-                alt="표지"
-                fill
-                className="object-contain group-hover:opacity-40"
-              />
-            </div>
-            <p className="overflow-ellipsis line-clamp-1">{book.title}</p>
-            <div className="flex">
-              <ReviewButton handleOnClick={() => openReviewModal(book)} />
-              <button
-                onClick={() => openLink(book.link)}
-                className="flex items-center gap-2 border-1 border-primary-200 p-3 rounded cursor-pointer"
-              >
-                구매
-                <FiExternalLink />
-              </button>
-              <button
-                onClick={() => deleteItem(book.id)}
-                className="border-1 border-primary-200 p-3 rounded cursor-pointer"
-              >
-                <FaRegTrashAlt />
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </>
+    <ul className="grid grid-cols-5 gap-8">
+      {wishList.map((book) => (
+        <li key={book.id}>
+          <div className="relative w-full aspect-[2/3] group">
+            <Image
+              src={book.cover}
+              alt="표지"
+              fill
+              className="object-contain group-hover:opacity-40"
+            />
+          </div>
+          <p className="overflow-ellipsis line-clamp-1">{book.title}</p>
+          <div className="flex">
+            <ReviewButton book={book} />
+            <button
+              onClick={() => openLink(book.link)}
+              className="flex items-center gap-2 border-1 border-primary-200 p-3 rounded cursor-pointer"
+            >
+              구매
+              <FiExternalLink />
+            </button>
+            <button
+              onClick={() => deleteItem(book.id)}
+              className="border-1 border-primary-200 p-3 rounded cursor-pointer"
+            >
+              <FaRegTrashAlt />
+            </button>
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }
