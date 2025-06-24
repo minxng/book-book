@@ -7,14 +7,28 @@ export default function MyBook() {
   const [currentTab, setCurrentTab] = useState("wish");
   return (
     <section className="container-style">
-      <div className="flex gap-4 text-center">
-        <p className="cursor-pointer" onClick={() => setCurrentTab("wish")}>
+      <ul className="flex text-center">
+        <li
+          className={`${
+            currentTab === "wish"
+              ? "bg-primary-500 text-white"
+              : "bg-white text-black border-1 border-primary border-dashed"
+          }  px-8 py-2 cursor-pointer rounded-t-2xl`}
+          onClick={() => setCurrentTab("wish")}
+        >
           위시리스트
-        </p>
-        <p className="cursor-pointer" onClick={() => setCurrentTab("review")}>
+        </li>
+        <li
+          className={`${
+            currentTab === "review"
+              ? "bg-primary-500 text-white"
+              : "bg-white text-black border-1 border-primary border-dashed"
+          }  px-8 py-2 cursor-pointer rounded-t-2xl`}
+          onClick={() => setCurrentTab("review")}
+        >
           리뷰 작성한 도서
-        </p>
-      </div>
+        </li>
+      </ul>
       {currentTab === "wish" ? <WishList /> : <ReviewList />}
     </section>
   );
