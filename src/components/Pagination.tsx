@@ -8,12 +8,12 @@ interface PaginationProps {
   currentCategory: number;
   currentKeyword: string;
   currentPage: number;
-  totalPages: number;
+  totalResults: number;
 }
 
 export default function Pagination({
   currentPage,
-  totalPages,
+  totalResults,
   currentType,
   currentCategory,
   currentKeyword,
@@ -27,7 +27,10 @@ export default function Pagination({
   };
   const groupCount = 10;
   const startPage = Math.floor((currentPage - 1) / groupCount) * groupCount + 1;
-  const endPage = Math.min(startPage + groupCount - 1, totalPages);
+  const endPage = Math.min(
+    startPage + groupCount - 1,
+    Math.ceil(totalResults / groupCount)
+  );
   const pagination = Array.from(
     { length: endPage - startPage + 1 },
     (_, i) => startPage + i
@@ -52,7 +55,7 @@ export default function Pagination({
           </Link>
         );
       })}
-      {endPage < totalPages && (
+      {endPage < totalResults / groupCount && (
         <Link href={`/list/${currentType}?${makeQuery(endPage + 1)}`}>
           <GrFormNext className="text-primary" size={20} />
         </Link>

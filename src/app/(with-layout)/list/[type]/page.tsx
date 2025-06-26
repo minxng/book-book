@@ -77,7 +77,7 @@ export default async function ListPage({ params, searchParams }: PageProps) {
           <BookList books={books} />
           <Pagination
             currentPage={currentPage}
-            totalPages={books.totalResults}
+            totalResults={books.totalResults}
             currentType={type}
             currentCategory={categoryId}
             currentKeyword={keyword}
