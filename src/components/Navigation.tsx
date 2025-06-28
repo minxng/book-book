@@ -31,13 +31,13 @@ export default function Navigation() {
     }
   };
   return (
-    <nav className="flex max-w-[1200px] w-4/5 mx-auto my-0 py-4 gap-10 items-center justify-between">
+    <nav className="flex max-w-[1200px] w-full mx-auto my-0 px-4 sm:px-8 py-4  gap-3 sm:gap-8 items-center justify-between flex-wrap sm:flex-nowrap">
       <h1>
         <Link href={"/"}>
           <Image src={logo} alt="logo" width={100} />
         </Link>
       </h1>
-      <div className="border-emerald-800 border-1 p-2 rounded-2xl flex items-center  w-1/2">
+      <div className="border-emerald-800 border-1 p-2 rounded-2xl flex items-center w-full sm:w-1/2 order-3 sm:order-2">
         <BiSearch size={24} className="text-primary" />
         <form onSubmit={handleOnSubmit} className="w-full">
           <input
@@ -49,7 +49,7 @@ export default function Navigation() {
         </form>
       </div>
       {user ? (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 order-2 sm:order-3">
           <Link
             href="/my-book"
             className="flex items-center gap-2 cursor-pointer"
@@ -65,7 +65,7 @@ export default function Navigation() {
       ) : (
         <Link
           href={"/login"}
-          className="flex items-center gap-2 cursor-pointer"
+          className="flex items-center gap-2 cursor-pointer order-2 sm:order-3"
         >
           <BsPersonCircle size={30} className="text-primary" />
           로그인

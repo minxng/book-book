@@ -1,6 +1,7 @@
 import { categories } from "@/app/constant";
 import BookList from "@/components/BookList";
 import Pagination from "@/components/Pagination";
+import SideCategorise from "@/components/SideCategorise";
 import {
   getBestSeller,
   getNewBooks,
@@ -36,10 +37,14 @@ export default async function ListPage({ params, searchParams }: PageProps) {
   };
   const currentPage = Number(page || 1);
   const books = await getBooks(currentPage);
-  let categoryName = "전체";
+  const categoryName = categoryId
+    ? categories.find((category) => String(category.id) === String(categoryId))
+        ?.title
+    : "전체";
+
   return (
-    <section className="container-style mt-4 border-primary-200 border-t-1">
-      <div className="flex mt-8">
+    <section className="container-style mt-4 border-primary-200 border-t-1 sm:p-0 p-4">
+      <div className="flex sm:mt-8 mt-0 sm:flex-row flex-col">
         <div className="basis-1/5">
           <SideCategorise categoryId={categoryId} />
         </div>
@@ -50,7 +55,7 @@ export default async function ListPage({ params, searchParams }: PageProps) {
               결과 총 {books.totalResults}건
             </p>
           )}
-          <p className="mb-8 font-bold text-lg">
+          <p className="mb-8 font-bold text-lg sm:block hidden">
             {type === "bestSeller" && `${categoryName} 베스트셀러`}
             {type === "newBook" && "이달의 신작도서"}
             {type === "recommendBook" && "이달의 추천도서"}

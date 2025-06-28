@@ -32,7 +32,7 @@ export default function BookList({ books }: BooksProps) {
       {books.item.map((book) => (
         <li
           key={book.itemId}
-          className="flex gap-8  border-b-primary-200 border-b py-8 first:pt-0"
+          className="flex sm:flex-nowrap flex-wrap sm:items-start items-center gap-8  border-b-primary-200 border-b py-8 first:pt-0"
         >
           <Link href={`/book/${book.isbn13}`}>
             <div className="basis-1/5">
@@ -44,12 +44,16 @@ export default function BookList({ books }: BooksProps) {
               {book.bestRank}
             </p>
             <Link href={`/book/${book.isbn13}`}>
-              <p className="text-xl font-bold">{he.decode(book.title)}</p>
+              <p className="text-base sm:text-xl font-bold">
+                {he.decode(book.title)}
+              </p>
             </Link>
             <p className="text-sm">
               {he.decode(book.author)} | {book.publisher} | {book.pubDate}
             </p>
-            <p>{he.decode(book.description)}</p>
+            <p className="text-ellipsis line-clamp-2">
+              {he.decode(book.description)}
+            </p>
           </div>
           <div className="flex flex-col gap-2">
             <WishButton book={book} />
