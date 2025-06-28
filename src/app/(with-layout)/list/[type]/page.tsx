@@ -7,7 +7,6 @@ import {
   getRecommendBooks,
   getSearchKeyword,
 } from "@/lib/api/aladin";
-import Link from "next/link";
 
 interface PageProps {
   params: {
@@ -42,25 +41,7 @@ export default async function ListPage({ params, searchParams }: PageProps) {
     <section className="container-style mt-4 border-primary-200 border-t-1">
       <div className="flex mt-8">
         <div className="basis-1/5">
-          <p className="font-bold text-lg mb-3">분야별 베스트셀러</p>
-          <ul>
-            {categories.map((category) => {
-              const isSelected = String(category.id) === String(categoryId);
-              if (isSelected) categoryName = category.title;
-              return (
-                <li
-                  key={category.id}
-                  className={`text-gray-800 mb-2 hover:text-primary-600 text-sm ${
-                    isSelected && "text-primary-600 font-bold"
-                  }`}
-                >
-                  <Link href={`/list/bestSeller?categoryId=${category.id}`}>
-                    {category.title}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          <SideCategorise categoryId={categoryId} />
         </div>
         <div className="basis-4/5">
           {type === "search" && (
