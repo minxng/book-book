@@ -28,9 +28,9 @@ interface Book {
 export default function BookSlide({ books, title, type }: Book) {
   SwiperCore.use([Navigation, Scrollbar, Autoplay]);
   return (
-    <section className="py-6 px-2 sm:px-8 xl:px-0">
+    <section className="py-2 sm:py-6 px-2 sm:px-8 xl:px-0">
       <Link href={`/list/${type}`}>
-        <h2 className="text-lg sm:text-xl font-bold py-4 flex items-center gap-2">
+        <h2 className="text-lg sm:text-xl font-bold py-3 sm:py-4 flex items-center gap-2">
           {title}
           <IoIosArrowForward />
         </h2>
@@ -38,13 +38,14 @@ export default function BookSlide({ books, title, type }: Book) {
       <Swiper
         loop={true}
         slidesPerView={2.8}
-        spaceBetween={20}
+        spaceBetween={10}
         autoplay={{
           delay: 3000,
         }}
         breakpoints={{
           500: {
             slidesPerView: 4,
+            spaceBetween: 20,
           },
           1024: {
             slidesPerView: 5,
@@ -69,7 +70,9 @@ export default function BookSlide({ books, title, type }: Book) {
                     {book.bestRank}
                   </p>
                 )}
-                <p className="text-ellipsis line-clamp-2">{book.title}</p>
+                <p className="text-ellipsis line-clamp-2 text-sm  sm:text-base">
+                  {book.title}
+                </p>
               </div>
             </Link>
           </SwiperSlide>
