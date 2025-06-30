@@ -25,7 +25,8 @@ export default function Pagination({
     query.set("page", String(page));
     return query;
   };
-  const groupCount = 10;
+  const isMobile = window.innerWidth < 500;
+  const groupCount = isMobile ? 5 : 10;
   const startPage = Math.floor((currentPage - 1) / groupCount) * groupCount + 1;
   const endPage = Math.min(
     startPage + groupCount - 1,
