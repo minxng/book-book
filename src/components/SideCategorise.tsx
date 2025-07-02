@@ -14,13 +14,16 @@ export default function SideCategorise({ categoryId }: { categoryId: number }) {
       <select onChange={selectCategory} className="sm:hidden">
         {categories.map((category) => {
           return (
-            <option
-              value={category.id}
-              key={category.id}
-              className={`text-gray-800 mb-2 text-sm `}
-            >
-              {category.title}
-            </option>
+            <>
+              <option value="">선택</option>
+              <option
+                value={category.id}
+                key={category.id}
+                className={`text-gray-800 mb-2 text-sm `}
+              >
+                {category.title}
+              </option>
+            </>
           );
         })}
       </select>

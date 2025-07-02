@@ -28,18 +28,24 @@ interface BooksProps {
 
 export default function BookList({ books }: BooksProps) {
   return (
-    <ul>
+    <ul className="mt-6 sm:mt-0">
       {books.item.map((book) => (
         <li
           key={book.itemId}
-          className="flex sm:flex-nowrap flex-wrap sm:items-start items-center gap-8  border-b-primary-200 border-b py-8 first:pt-0"
+          className="flex sm:flex-nowrap flex-wrap sm:items-start items-center gap-4 sm:gap-8  border-b-primary-200 border-b py-8 first:pt-0 justify-center sm:justify-baseline"
         >
           <Link href={`/book/${book.isbn13}`}>
-            <div className="basis-1/5">
-              <Image src={book.cover} alt="표지지" width={120} height={200} />
+            <div className="sm:basis-1/5 w-[200px] sm:w-[120px]">
+              <Image
+                src={book.cover}
+                alt="표지지"
+                className="w-full"
+                width={120}
+                height={120}
+              />
             </div>
           </Link>
-          <div className="basis-4/5 flex flex-col gap-2">
+          <div className="sm:basis-4/5 flex flex-col gap-2">
             <p className="min-w-5 text-sm bg-primary w-fit text-center rounded text-white">
               {book.bestRank}
             </p>
@@ -55,7 +61,7 @@ export default function BookList({ books }: BooksProps) {
               {he.decode(book.description)}
             </p>
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex sm:flex-col gap-2">
             <WishButton book={book} />
             <ReviewButton book={{ ...book, id: book.itemId }} />
           </div>
