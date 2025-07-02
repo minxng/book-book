@@ -4,7 +4,6 @@ import { removeWishListItem, subscribeToWishList } from "@/lib/api/firebase";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { FiExternalLink } from "react-icons/fi";
 import ReviewButton from "./ReviewButton";
 
 type WishListItem = {
@@ -35,25 +34,24 @@ export default function WishList() {
   return (
     <ul className="grid grid-cols-5 gap-8">
       {wishList.map((book) => (
-        <li key={book.id}>
+        <li key={book.id} className="flex flex-col gap-2">
           <div className="relative w-full aspect-[2/3] group">
             <Image
               src={book.cover}
               alt="표지"
               fill
-              className="object-contain group-hover:opacity-40"
+              className="object-contain group-hover:brightness-50"
             />
-          </div>
-          <p className="overflow-ellipsis line-clamp-1">{book.title}</p>
-          <div className="flex">
-            <ReviewButton book={book} />
             <button
               onClick={() => openLink(book.link)}
-              className="flex items-center gap-2 border-1 border-primary-200 p-3 rounded cursor-pointer"
+              className="absolute top-1/2 left-1/2 -translate-1/2 hidden group-hover:flex items-center gap-2 p-3 rounded cursor-pointer bg-primary-100"
             >
-              구매
-              <FiExternalLink />
+              자세히 보기
             </button>
+          </div>
+          <p className="overflow-ellipsis line-clamp-1">{book.title}</p>
+          <div className="flex gap-2">
+            <ReviewButton book={book} />
             <button
               onClick={() => deleteItem(book.id)}
               className="border-1 border-primary-200 p-3 rounded cursor-pointer"

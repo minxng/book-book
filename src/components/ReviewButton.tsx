@@ -52,7 +52,7 @@ export default function ReviewButton({ book }: { book: WishListItem }) {
       )}
       <button
         onClick={() => openReviewModal(book)}
-        className="flex items-center justify-center gap-1 whitespace-nowrap p-2 text-sm rounded cursor-pointer bg-blue-50 hover:bg-blue-100"
+        className="flex items-center justify-center gap-1 w-full whitespace-nowrap p-2 text-sm rounded cursor-pointer bg-blue-50 hover:bg-blue-100"
       >
         리뷰쓰기 <FaPencilAlt color="orange" />
       </button>
