@@ -7,7 +7,7 @@ export default function MyBook() {
   const [currentTab, setCurrentTab] = useState("wish");
   return (
     <section className="container-style">
-      <ul className="flex text-center">
+      <ul className="flex text-center px-4">
         <li
           className={`${
             currentTab === "wish"

@@ -32,7 +32,7 @@ export default function WishList() {
     removeWishListItem(id);
   };
   return (
-    <ul className="grid grid-cols-5 gap-8">
+    <ul className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 px-4 gap-4 md:gap-8">
       {wishList.map((book) => (
         <li key={book.id} className="flex flex-col gap-2">
           <div className="relative w-full aspect-[2/3] group">
@@ -44,9 +44,9 @@ export default function WishList() {
             />
             <button
               onClick={() => openLink(book.link)}
-              className="absolute top-1/2 left-1/2 -translate-1/2 hidden group-hover:flex items-center gap-2 p-3 rounded cursor-pointer bg-primary-100"
+              className="absolute top-1/2 left-1/2 -translate-1/2 hidden group-hover:flex items-center gap-2 p-2 rounded cursor-pointer bg-white text-sm"
             >
-              자세히 보기
+              상세 보기
             </button>
           </div>
           <p className="overflow-ellipsis line-clamp-1">{book.title}</p>
