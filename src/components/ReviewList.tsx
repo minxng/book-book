@@ -103,44 +103,50 @@ export default function ReviewList() {
           existingReview={selectedReview}
         />
       )}
-      <ul className="mt-4">
+      <ul className="mt-4 px-4">
         {reviewList &&
           reviewList.map((book) => (
             <li
               key={book.id}
-              className="flex gap-4 py-8 border-b-1 border-gray-200"
+              className="grid grid-cols-[max-content_1fr] gap-4 py-6 first:pt-0 border-b-1 border-gray-200 justify-center"
             >
-              <div>
-                <Image src={book.cover} alt="cover" width={200} height={200} />
+              <div className="sm:w-[200px] w-[120px] row-start-1 row-end-3 col-start-1 col-end-2">
+                <Image
+                  src={book.cover}
+                  alt="cover"
+                  width={200}
+                  height={200}
+                  className="w-full"
+                />
               </div>
-              <div className="w-full">
-                <div className="flex justify-between">
-                  <div>
-                    <p className="text-xl">{book.title}</p>
-                    <p className="flex items-center">
-                      {book.rating}
-                      <FaRegStar />
-                      <FaRegStar />
-                      <FaRegStar />
-                      <FaRegStar />
-                      <FaRegStar />
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => openReviewModal(book)}
-                    className="p-3 rounded cursor-pointer bg-amber-100 hover:bg-amber-200"
-                  >
-                    메모 작성
-                  </button>
+              <div className="flex flex-col sm:flex-row justify-between row-start-1 row-end-2 col-start-2 col-end-3">
+                <div>
+                  <p className="text-xl">{book.title}</p>
+                  <p className="flex items-center">
+                    {book.rating}
+                    <FaRegStar />
+                    <FaRegStar />
+                    <FaRegStar />
+                    <FaRegStar />
+                    <FaRegStar />
+                  </p>
                 </div>
+                <button
+                  onClick={() => openReviewModal(book)}
+                  className="p-3 h-13 rounded cursor-pointer bg-amber-100 hover:bg-amber-200"
+                >
+                  메모 작성
+                </button>
+              </div>
+              <ul className="col-start-1 col-end-3 sm:col-start-2">
                 {book.comments &&
                   Object.entries(book.comments).map(([commentKey, comment]) => (
-                    <div
+                    <li
                       className="bg-primary-200 rounded-xl p-4 w-full my-3 flex justify-between"
                       key={comment.createdAt}
                     >
                       <p>{comment.review}</p>
-                      <div>
+                      <div className="whitespace-nowrap">
                         <button
                           onClick={() =>
                             openReviewModal(
@@ -160,9 +166,9 @@ export default function ReviewList() {
                           <FaRegTrashAlt />
                         </button>
                       </div>
-                    </div>
+                    </li>
                   ))}
-              </div>
+              </ul>
             </li>
           ))}
       </ul>
