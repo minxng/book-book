@@ -40,8 +40,8 @@ export default function BookList({ books }: BooksProps) {
                 src={book.cover.replace("cover200", "cover500")}
                 alt="표지지"
                 className="w-full"
-                width={120}
-                height={120}
+                width={200}
+                height={200}
               />
             </div>
           </Link>

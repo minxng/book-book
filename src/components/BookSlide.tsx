@@ -57,7 +57,7 @@ export default function BookSlide({ books, title, type }: Book) {
             <Link href={`/book/${book.isbn13}`}>
               <div className="relative w-full aspect-[170/240]">
                 <Image
-                  src={book.cover}
+                  src={book.cover.replace("cover200", "cover500")}
                   alt="book cover"
                   className="w-full h-full object-contain"
                   fill
