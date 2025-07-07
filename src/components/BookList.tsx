@@ -37,7 +37,7 @@ export default function BookList({ books }: BooksProps) {
           <Link href={`/book/${book.isbn13}`}>
             <div className="sm:basis-1/5 w-[200px] sm:w-[120px]">
               <Image
-                src={book.cover}
+                src={book.cover.replace("cover200", "cover500")}
                 alt="표지지"
                 className="w-full"
                 width={120}
