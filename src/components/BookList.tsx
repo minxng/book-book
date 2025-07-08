@@ -3,6 +3,7 @@
 import he from "he";
 import Image from "next/image";
 import Link from "next/link";
+import InfoButton from "./InfoButton";
 import ReviewButton from "./ReviewButton";
 import WishButton from "./WishButton";
 
@@ -64,6 +65,7 @@ export default function BookList({ books }: BooksProps) {
           <div className="flex sm:flex-col gap-2">
             <WishButton book={book} />
             <ReviewButton book={{ ...book, id: book.itemId }} />
+            <InfoButton link={book.link} />
           </div>
         </li>
       ))}

@@ -1,3 +1,4 @@
+import InfoButton from "@/components/InfoButton";
 import ReviewButton from "@/components/ReviewButton";
 import WishButton from "@/components/WishButton";
 import { getBookDetail } from "@/lib/api/aladin";
@@ -34,6 +35,7 @@ export default async function BookDetail({
           <div className="flex gap-2">
             <WishButton book={book} />
             <ReviewButton book={{ ...book, id: book.itemId }} />
+            <InfoButton link={book.link} />
           </div>
         </div>
       </div>
