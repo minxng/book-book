@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FaRegStar } from "react-icons/fa";
 import Modal from "./Modal";
+import Rating from "./Rating";
 
 type WishListItem = {
   id: string;
@@ -33,6 +33,7 @@ export default function ReviewModal({
 }) {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
+  const [newRating, setNewRating] = useState(0);
 
   useEffect(() => {
     if (isOpen && existingReview) {
@@ -55,7 +56,7 @@ export default function ReviewModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <h2 className="text-lg font-bold mb-2">{book.title}</h2>
-      <FaRegStar size={40} />
+      <Rating value={newRating} onChange={(v) => setNewRating(v)} />
       <input
         type="number"
         value={rating}
