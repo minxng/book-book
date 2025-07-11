@@ -33,13 +33,11 @@ export default function ReviewModal({
 }) {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
-  // const [newRating, setNewRating] = useState(0);
 
   useEffect(() => {
     if (isOpen && existingReview) {
       setReview(existingReview.review ?? "");
       setRating(existingReview.rating ?? 0);
-      console.log(existingReview, "//");
     }
     if (!isOpen) {
       setReview("");
