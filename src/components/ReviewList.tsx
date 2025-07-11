@@ -7,7 +7,8 @@ import {
 } from "@/lib/api/firebase";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FaPencilAlt, FaRegStar, FaRegTrashAlt } from "react-icons/fa";
+import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
+import Rating from "./Rating";
 import ReviewModal from "./ReviewModal";
 
 interface CommentType {
@@ -122,14 +123,7 @@ export default function ReviewList() {
               <div className="flex flex-col sm:flex-row justify-between row-start-1 row-end-2 col-start-2 col-end-3">
                 <div>
                   <p className="text-xl">{book.title}</p>
-                  <p className="flex items-center">
-                    {book.rating}
-                    <FaRegStar />
-                    <FaRegStar />
-                    <FaRegStar />
-                    <FaRegStar />
-                    <FaRegStar />
-                  </p>
+                  <Rating value={book.rating} readonly />
                 </div>
                 <button
                   onClick={() => openReviewModal(book)}

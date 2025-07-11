@@ -33,12 +33,13 @@ export default function ReviewModal({
 }) {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
-  const [newRating, setNewRating] = useState(0);
+  // const [newRating, setNewRating] = useState(0);
 
   useEffect(() => {
     if (isOpen && existingReview) {
       setReview(existingReview.review ?? "");
       setRating(existingReview.rating ?? 0);
+      console.log(existingReview, "//");
     }
     if (!isOpen) {
       setReview("");
@@ -56,12 +57,7 @@ export default function ReviewModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <h2 className="text-lg font-bold mb-2">{book.title}</h2>
-      <Rating value={newRating} onChange={(v) => setNewRating(v)} />
-      <input
-        type="number"
-        value={rating}
-        onChange={(e) => setRating(Number(e.target.value))}
-      />
+      <Rating value={rating} readonly={false} onChange={(v) => setRating(v)} />
       <textarea
         className="w-full border p-2 rounded resize-none h-24"
         value={review}

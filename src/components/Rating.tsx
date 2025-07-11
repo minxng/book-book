@@ -1,16 +1,22 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface RatingProps {
   value: number;
+  readonly: boolean;
   onChange?: (value: number) => void;
 }
 
-export default function Rating({ value, onChange }: RatingProps) {
+export default function Rating({ value, onChange, readonly }: RatingProps) {
   const [hoverValue, setHoverValue] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const isTouchingRef = useRef(false);
+
+  useEffect(() => {
+    const val = calculateValue(value);
+    onChange?.(val);
+  }, []);
 
   const calculateValue = (clientX: number) => {
     const container = containerRef.current;
@@ -53,16 +59,21 @@ export default function Rating({ value, onChange }: RatingProps) {
 
   const displayValue = hoverValue !== null ? hoverValue : value;
 
+  const eventHandlers = readonly
+    ? {}
+    : {
+        onMouseMove: handleMouseMove,
+        onMouseLeave: handleMouseLeave,
+        onClick: handleClick,
+        onTouchStart: handleTouchStart,
+        onTouchMove: handleTouchMove,
+        onTouchEnd: handleTouchEnd,
+      };
   return (
     <div
       ref={containerRef}
       className="flex cursor-pointer touch-none select-none w-fit"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
+      {...eventHandlers}
     >
       {[1, 2, 3, 4, 5].map((i) => {
         const full = i <= displayValue;
