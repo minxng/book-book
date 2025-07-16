@@ -85,6 +85,7 @@ export default function ReviewList() {
     setIsOpen(true);
   };
   const deleteReviewItem = (bookId: string, commentId: string) => {
+    if (!confirm("삭제하시겠습니까?")) return;
     deleteReview(bookId, commentId);
   };
   const handleCloseModal = () => {
