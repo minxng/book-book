@@ -112,7 +112,7 @@ export default function ReviewList() {
               key={book.id}
               className="grid grid-cols-[max-content_1fr] gap-4 py-6 first:pt-0 border-b-1 border-gray-200 justify-center"
             >
-              <div className="sm:w-[200px] w-[120px] row-start-1 row-end-3 col-start-1 col-end-2">
+              <div className="sm:w-[200px] w-[120px] row-start-1 row-end-3 sm:row-end-4 col-start-1 col-end-2">
                 <Image
                   src={book.cover}
                   alt="cover"
@@ -121,19 +121,24 @@ export default function ReviewList() {
                   className="w-full"
                 />
               </div>
-              <div className="flex flex-col sm:flex-row justify-between row-start-1 row-end-2 col-start-2 col-end-3">
+              <div className="flex flex-col sm:flex-row justify-between row-start-1 row-end-3 sm:row-end-2 col-start-2 col-end-3 items-start">
                 <div>
-                  <p className="text-xl">{book.title}</p>
+                  <p className="text-base sm:text-xl mb-3">{book.title}</p>
                   <Rating value={book.rating} readonly />
                 </div>
                 <button
                   onClick={() => openReviewModal(book)}
                   className="p-3 h-13 rounded cursor-pointer bg-amber-100 hover:bg-amber-200"
                 >
-                  메모 작성
+                  리뷰 작성
                 </button>
               </div>
               <ul className="col-start-1 col-end-3 sm:col-start-2">
+                {!book.comments && (
+                  <li className="bg-primary-100 rounded-xl p-4 w-full my-3 flex justify-between">
+                    <p>등록된 리뷰가 없습니다.</p>
+                  </li>
+                )}
                 {book.comments &&
                   Object.entries(book.comments).map(([commentKey, comment]) => (
                     <li

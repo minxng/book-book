@@ -24,7 +24,7 @@ export default function Login() {
     }
   };
   return (
-    <section className="w-96 mx-auto">
+    <section className="w-96 mx-auto px-4">
       <Link href="/">
         <Image src={logo} alt="logo" width={300} className="mx-auto my-16" />
       </Link>

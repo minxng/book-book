@@ -40,6 +40,7 @@ export default function WishList() {
               src={book.cover}
               alt="표지"
               fill
+              sizes=""
               className="object-contain group-hover:brightness-50"
             />
             <button
