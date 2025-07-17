@@ -7,7 +7,7 @@ import {
 } from "@/lib/api/firebase";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
+import { FaRegTrashAlt } from "react-icons/fa";
 import Rating from "./Rating";
 import ReviewModal from "./ReviewModal";
 
@@ -142,30 +142,27 @@ export default function ReviewList() {
                 {book.comments &&
                   Object.entries(book.comments).map(([commentKey, comment]) => (
                     <li
-                      className="bg-primary-200 rounded-xl p-4 w-full my-3 flex justify-between"
+                      className="bg-primary-200 rounded-xl p-4 w-full my-3 flex justify-between "
                       key={comment.createdAt}
                     >
-                      <p>{comment.review}</p>
-                      <div className="whitespace-nowrap">
-                        <button
-                          onClick={() =>
-                            openReviewModal(
-                              book,
-                              { review: comment.review, rating: book.rating },
-                              commentKey
-                            )
-                          }
-                          className="p-3 rounded cursor-pointer"
-                        >
-                          <FaPencilAlt />
-                        </button>
-                        <button
-                          onClick={() => deleteReviewItem(book.id, commentKey)}
-                          className="p-3 rounded cursor-pointer"
-                        >
-                          <FaRegTrashAlt />
-                        </button>
-                      </div>
+                      <p
+                        className="cursor-pointer"
+                        onClick={() =>
+                          openReviewModal(
+                            book,
+                            { review: comment.review, rating: book.rating },
+                            commentKey
+                          )
+                        }
+                      >
+                        {comment.review}
+                      </p>
+                      <button
+                        onClick={() => deleteReviewItem(book.id, commentKey)}
+                        className="p-3 rounded cursor-pointer"
+                      >
+                        <FaRegTrashAlt />
+                      </button>
                     </li>
                   ))}
               </ul>
