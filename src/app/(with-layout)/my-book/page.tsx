@@ -12,7 +12,7 @@ export default function MyBook() {
           className={`${
             currentTab === "wish"
               ? "bg-primary-500 text-white"
-              : "bg-white text-black border-1 border-primary border-dashed"
+              : "bg-primary-200 text-black"
           }  px-8 py-2 cursor-pointer rounded-t-2xl`}
           onClick={() => setCurrentTab("wish")}
         >
@@ -22,7 +22,7 @@ export default function MyBook() {
           className={`${
             currentTab === "review"
               ? "bg-primary-500 text-white"
-              : "bg-white text-black border-1 border-primary border-dashed"
+              : "bg-primary-200 text-black"
           }  px-8 py-2 cursor-pointer rounded-t-2xl`}
           onClick={() => setCurrentTab("review")}
         >
