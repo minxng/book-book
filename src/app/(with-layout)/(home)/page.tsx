@@ -15,15 +15,15 @@ export default async function Home() {
       <Banner />
       <BookSlide
         books={recommendBooks}
-        title="이달의 추천도서"
+        title="🔥 이달의 추천도서"
         type="recommendBook"
       />
       <BookSlide
         books={bestseller}
-        title="베스트셀러 TOP 10"
+        title="🏆 베스트셀러 TOP 10"
         type="bestSeller"
       />
-      <BookSlide books={newBooks} title="이달의 신간도서" type="newBook" />
+      <BookSlide books={newBooks} title="⭐ 이달의 신간도서" type="newBook" />
     </div>
   );
 }
