@@ -12,18 +12,16 @@ export default function SideCategorise({ categoryId }: { categoryId: number }) {
     <div className="flex sm:block items-center">
       <p className="font-bold text-lg sm:mb-3">분야별 베스트셀러</p>
       <select onChange={selectCategory} className="sm:hidden">
+        <option value="">선택</option>
         {categories.map((category) => {
           return (
-            <>
-              <option value="">선택</option>
-              <option
-                value={category.id}
-                key={category.id}
-                className={`text-gray-800 mb-2 text-sm `}
-              >
-                {category.title}
-              </option>
-            </>
+            <option
+              value={category.id}
+              key={category.id}
+              className={`text-gray-800 mb-2 text-sm `}
+            >
+              {category.title}
+            </option>
           );
         })}
       </select>
