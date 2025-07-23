@@ -1,7 +1,8 @@
+import BookSlide from "@/components/BookSlide";
 import InfoButton from "@/components/InfoButton";
 import ReviewButton from "@/components/ReviewButton";
 import WishButton from "@/components/WishButton";
-import { getBookDetail } from "@/lib/api/aladin";
+import { getBestSeller, getBookDetail } from "@/lib/api/aladin";
 import he from "he";
 import Image from "next/image";
 
@@ -12,6 +13,7 @@ export default async function BookDetail({
 }) {
   const { id } = await params;
   const book = await getBookDetail(id);
+  const categoryBooks = await getBestSeller(1, book.categoryId);
   return (
     <section className="container-style p-8">
       <div className="flex gap-10 sm:flex-row flex-col items-center sm:items-start">
@@ -39,6 +41,11 @@ export default async function BookDetail({
           </div>
         </div>
       </div>
+      <BookSlide
+        books={categoryBooks}
+        title={categoryBooks.searchCategoryName}
+        type="bestSeller"
+      />
     </section>
   );
 }
