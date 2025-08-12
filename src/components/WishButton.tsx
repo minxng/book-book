@@ -7,12 +7,19 @@ interface BookProps {
     title: string;
     cover: string;
     link: string;
+    isbn13: string;
   };
 }
 export default function WishButton({ book }: BookProps) {
   const handleOnClick = async () => {
     const cover = book.cover.replace("coversum", "cover500");
-    const result = await addWishList(book.itemId, book.title, cover, book.link);
+    const result = await addWishList(
+      book.itemId,
+      book.title,
+      cover,
+      book.link,
+      book.isbn13
+    );
     if (result.success) {
       alert("성공");
     } else {

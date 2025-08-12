@@ -79,7 +79,8 @@ export const addWishList = async (
   id: string,
   title: string,
   cover: string,
-  link: string
+  link: string,
+  isbn13: string
 ) => {
   const userId = getUserId();
   try {
@@ -88,6 +89,7 @@ export const addWishList = async (
       id,
       cover,
       link,
+      isbn13,
     });
     return { success: true };
   } catch (error) {
