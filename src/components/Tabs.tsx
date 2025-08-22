@@ -1,0 +1,35 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+export default function Tabs() {
+  const pathname = usePathname();
+  return (
+    <section>
+      <ul className="flex text-center px-4">
+        <Link href="/my-book/wishlist">
+          <li
+            className={`${
+              pathname === "wishlist"
+                ? "bg-primary-500 text-white"
+                : "bg-primary-200 text-black"
+            }  px-8 py-2 cursor-pointer rounded-t-2xl`}
+          >
+            위시리스트
+          </li>
+        </Link>
+        <Link href="/my-book/review">
+          <li
+            className={`${
+              pathname === "review"
+                ? "bg-primary-500 text-white"
+                : "bg-primary-200 text-black"
+            }  px-8 py-2 cursor-pointer rounded-t-2xl`}
+          >
+            리뷰 작성한 도서
+          </li>
+        </Link>
+      </ul>
+    </section>
+  );
+}
