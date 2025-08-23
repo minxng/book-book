@@ -15,8 +15,8 @@ export default async function BookDetail({
   const book = await getBookDetail(id);
   const categoryBooks = await getBestSeller(1, book.categoryId);
   return (
-    <section className="container-style p-8">
-      <div className="flex gap-10 sm:flex-row flex-col items-center sm:items-start">
+    <section className="container-style p-4 sm:p-8">
+      <div className="flex gap-4 sm:gap-10 sm:flex-row flex-col items-center sm:items-start">
         <div className="w-[250px] max-w-64 sm:w-[300px]">
           <Image
             src={book.cover.replace("coversum", "cover500")}
