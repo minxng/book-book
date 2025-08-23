@@ -5,6 +5,7 @@ import ReviewModal from "@/components/ReviewModal";
 import { useAuth } from "@/hooks/useAuth";
 import {
   deleteReview,
+  deleteReviewBook,
   subscribeToReviewList,
   updateReview,
   writeReview,
@@ -90,6 +91,10 @@ export default function ReviewList() {
     if (!confirm("삭제하시겠습니까?")) return;
     deleteReview(bookId, commentId);
   };
+  const deleteReviewBookItem = (bookId: string) => {
+    if (!confirm("삭제하시겠습니까?")) return;
+    deleteReviewBook(bookId);
+  };
   const handleCloseModal = () => {
     setIsOpen(false);
     setSelectedBook(null);
@@ -128,12 +133,20 @@ export default function ReviewList() {
                   <p className="text-base sm:text-xl mb-3">{book.title}</p>
                   <Rating value={book.rating} readonly />
                 </div>
-                <button
-                  onClick={() => openReviewModal(book)}
-                  className="p-3 h-13 rounded cursor-pointer bg-amber-100 hover:bg-amber-200"
-                >
-                  리뷰 작성
-                </button>
+                <div>
+                  <button
+                    onClick={() => openReviewModal(book)}
+                    className="p-3 h-13 rounded cursor-pointer bg-amber-100 hover:bg-amber-200"
+                  >
+                    리뷰 작성
+                  </button>
+                  <button
+                    onClick={() => deleteReviewBookItem(book.id)}
+                    className="p-3 rounded cursor-pointer"
+                  >
+                    <FaRegTrashAlt />
+                  </button>
+                </div>
               </div>
               <ul className="col-start-1 col-end-3 sm:col-start-2">
                 {!book.comments && (

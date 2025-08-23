@@ -209,3 +209,8 @@ export const deleteReview = (bookId: string, commentId: string) => {
   const userId = getUserId();
   remove(ref(db, `users/${userId}/reviews/${bookId}/comments/${commentId}`));
 };
+
+export const deleteReviewBook = (bookId: string) => {
+  const userId = getUserId();
+  remove(ref(db, `users/${userId}/reviews/${bookId}`));
+};
