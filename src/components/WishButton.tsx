@@ -1,5 +1,6 @@
 "use client";
 import { addWishList } from "@/lib/api/firebase";
+import { useRouter } from "next/navigation";
 import { FaHeart } from "react-icons/fa6";
 interface BookProps {
   book: {
@@ -11,6 +12,7 @@ interface BookProps {
   };
 }
 export default function WishButton({ book }: BookProps) {
+  const router = useRouter();
   const handleOnClick = async () => {
     const cover = book.cover.replace("coversum", "cover500");
     const result = await addWishList(
@@ -22,6 +24,7 @@ export default function WishButton({ book }: BookProps) {
     );
     if (result.success) {
       alert("성공");
+      router.push("/my-book/wishlist");
     } else {
       alert("실패 다시 시도해주세요");
     }

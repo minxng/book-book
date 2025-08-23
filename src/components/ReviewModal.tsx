@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
 import Rating from "./Rating";
@@ -48,6 +49,7 @@ export default function ReviewModal({
       setRating(0);
     }
   }, [isOpen, existingReview]);
+  const router = useRouter();
   const handleSave = () => {
     const id = book.id;
     const title = book.title;
@@ -55,6 +57,7 @@ export default function ReviewModal({
     onSubmit({ id, title, cover, review, rating });
     setReview("");
     onClose();
+    router.push("/my-book/review");
   };
 
   const textarea = useRef<HTMLTextAreaElement>(null);

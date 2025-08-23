@@ -51,7 +51,7 @@ export default function Navigation() {
       {user ? (
         <div className="flex items-center gap-4 order-2 sm:order-3">
           <Link
-            href="/my-book"
+            href="/my-book/wishlist"
             className="flex items-center gap-2 cursor-pointer"
           >
             <BsPersonCircle size={30} className="text-primary" />
