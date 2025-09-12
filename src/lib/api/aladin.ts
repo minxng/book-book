@@ -1,5 +1,5 @@
 const BASE_URL = "http://www.aladin.co.kr/ttb/api";
-const API_KEY = process.env.NEXT_PUBLIC_ALADIN_API_KEY;
+const API_KEY = process.env.NEXT_PUBLIC_ALADIN_KEY;
 
 export async function getBestSeller(page?: number, categoryId?: number) {
   const response = await fetch(
