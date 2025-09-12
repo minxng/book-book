@@ -70,27 +70,39 @@ export default function ReviewModal({
   };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="flex flex-col gap-3">
-        <h2 className="text-lg font-bold">{book.title}</h2>
-        <Rating
-          value={rating}
-          readonly={false}
-          onChange={(v) => setRating(v)}
-        />
-        <textarea
-          ref={textarea}
-          rows={1}
-          className="w-full p-2 rounded max-h-96 min-h-28 border border-primary-300 text-sm focus:outline-0"
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
-        />
-        <div className="mt-4 flex justify-end gap-2">
-          <button onClick={onClose} className="border px-4 py-2 rounded">
+      <div className="flex flex-col gap-4 w-80 sm:min-w-96 p-2">
+        <h2 className="text-lg font-bold text-gray-800 border-b pb-2">
+          {book.title}
+        </h2>
+        <div className="flex flex-col gap-1">
+          <label className="text-sm text-gray-600">평점을 선택해주세요</label>
+          <Rating
+            value={rating}
+            readonly={false}
+            onChange={(v) => setRating(v)}
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="text-sm text-gray-600">리뷰</label>
+          <textarea
+            ref={textarea}
+            rows={3}
+            className="w-full p-3 rounded-xl border border-primary-300 text-sm text-gray-800 resize-none focus:outline-none focus:ring-2 focus:ring-primary-400 max-h-96 min-h-28"
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
+            placeholder="리뷰를 작성해주세요..."
+          />
+        </div>
+        <div className="mt-2 flex justify-end gap-2">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100 cursor-pointer"
+          >
             취소
           </button>
           <button
             onClick={handleSave}
-            className="bg-primary-500 text-white px-4 py-2 rounded"
+            className="px-5 py-2 rounded-lg bg-primary-500 text-white hover:bg-primary-600 cursor-pointer"
           >
             저장
           </button>
