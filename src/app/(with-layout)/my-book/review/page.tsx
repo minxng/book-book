@@ -183,6 +183,11 @@ export default function ReviewList() {
               </ul>
             </li>
           ))}
+        {!reviewList.length && (
+          <p className="bg-primary-100 rounded-xl p-4 w-full my-3 flex justify-between">
+            등록된 리뷰가 없습니다.
+          </p>
+        )}
       </ul>
     </>
   );
