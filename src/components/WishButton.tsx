@@ -1,7 +1,8 @@
 "use client";
 import { addWishList } from "@/lib/api/firebase";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FaHeart } from "react-icons/fa6";
+import WishConfirmModal from "./WishConfirmModal";
 interface BookProps {
   book: {
     itemId: string;
@@ -12,7 +13,7 @@ interface BookProps {
   };
 }
 export default function WishButton({ book }: BookProps) {
-  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
   const handleOnClick = async () => {
     const cover = book.cover.replace("coversum", "cover500");
     const result = await addWishList(
@@ -23,18 +24,20 @@ export default function WishButton({ book }: BookProps) {
       book.isbn13
     );
     if (result.success) {
-      alert("성공");
-      router.push("/my-book/wishlist");
+      setIsOpen(true);
     } else {
       alert("실패 다시 시도해주세요");
     }
   };
   return (
-    <button
-      onClick={handleOnClick}
-      className="w-full flex justify-center items-center gap-1 whitespace-nowrap p-2 text-sm rounded cursor-pointer bg-blue-50 hover:bg-blue-100"
-    >
-      찜하기 <FaHeart color="orange" />
-    </button>
+    <>
+      <WishConfirmModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <button
+        onClick={handleOnClick}
+        className="w-full flex justify-center items-center gap-1 whitespace-nowrap p-2 text-sm rounded cursor-pointer bg-blue-50 hover:bg-blue-100"
+      >
+        찜하기 <FaHeart color="orange" />
+      </button>
+    </>
   );
 }
