@@ -17,7 +17,7 @@ interface BookItem {
   pubDate: string;
   publisher: string;
   bestRank: number;
-  isbn13: number;
+  isbn13: string;
   bookId: string;
   link: string;
 }
