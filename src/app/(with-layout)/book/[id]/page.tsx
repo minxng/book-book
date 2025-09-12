@@ -9,7 +9,7 @@ import Image from "next/image";
 export default async function BookDetail({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
   const book = await getBookDetail(id);
