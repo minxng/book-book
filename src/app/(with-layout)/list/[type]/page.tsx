@@ -10,14 +10,14 @@ import {
 } from "@/lib/api/aladin";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     type: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     keyword: string;
     categoryId: number;
     page: number;
-  };
+  }>;
 }
 
 export default async function ListPage({ params, searchParams }: PageProps) {
