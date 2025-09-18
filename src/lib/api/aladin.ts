@@ -5,7 +5,8 @@ export async function getBestSeller(page?: number, categoryId?: number) {
   const response = await fetch(
     `${BASE_URL}/ItemList.aspx?ttbkey=${API_KEY}&QueryType=Bestseller&CategoryId=${
       categoryId ?? 0
-    }&MaxResults=10&start=${page}&SearchTarget=Book&output=JS&Cover=Big&Version=20131101`
+    }&MaxResults=10&start=${page}&SearchTarget=Book&output=JS&Cover=Big&Version=20131101`,
+    { next: { revalidate: 600 } }
   );
   const json = await response.json();
   return json;
@@ -13,7 +14,8 @@ export async function getBestSeller(page?: number, categoryId?: number) {
 
 export async function getNewBooks(page?: number) {
   const response = await fetch(
-    `${BASE_URL}/ItemList.aspx?ttbkey=${API_KEY}&QueryType=ItemNewSpecial&MaxResults=10&start=${page}&SearchTarget=Book&output=JS&Cover=Big&Version=20131101`
+    `${BASE_URL}/ItemList.aspx?ttbkey=${API_KEY}&QueryType=ItemNewSpecial&MaxResults=10&start=${page}&SearchTarget=Book&output=JS&Cover=Big&Version=20131101`,
+    { next: { revalidate: 600 } }
   );
   const json = await response.json();
   return json;
@@ -21,7 +23,8 @@ export async function getNewBooks(page?: number) {
 
 export async function getRecommendBooks(page?: number) {
   const response = await fetch(
-    `${BASE_URL}/ItemList.aspx?ttbkey=${API_KEY}&QueryType=ItemEditorChoice&MaxResults=10&start=${page}&SearchTarget=Book&CategoryId=50930&output=JS&Cover=Big&Version=20131101`
+    `${BASE_URL}/ItemList.aspx?ttbkey=${API_KEY}&QueryType=ItemEditorChoice&MaxResults=10&start=${page}&SearchTarget=Book&CategoryId=50930&output=JS&Cover=Big&Version=20131101`,
+    { next: { revalidate: 600 } }
   );
   const json = await response.json();
   return json;
@@ -29,7 +32,8 @@ export async function getRecommendBooks(page?: number) {
 
 export async function getBookDetail(id: string) {
   const response = await fetch(
-    `${BASE_URL}/ItemLookUp.aspx?ttbkey=${API_KEY}&itemIdType=isbn13&ItemId=${id}&output=JS&Version=20131101`
+    `${BASE_URL}/ItemLookUp.aspx?ttbkey=${API_KEY}&itemIdType=isbn13&ItemId=${id}&output=JS&Version=20131101`,
+    { cache: "no-store" }
   );
   const json = await response.json();
   return json.item[0];
