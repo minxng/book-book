@@ -23,7 +23,6 @@ export default function ReviewButton({ book }: { book: WishListItem }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<WishListItem | null>(null);
   const { user } = useAuth();
-  console.log(user);
   const openReviewModal = (book: WishListItem) => {
     if (!user) return alert("로그인 후 이용해주세요.");
     setSelectedBook(book);
