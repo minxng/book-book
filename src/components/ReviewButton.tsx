@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from "@/hooks/useAuth";
 import { writeReview } from "@/lib/api/firebase";
 import { useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
@@ -21,7 +22,10 @@ type WishListItem = {
 export default function ReviewButton({ book }: { book: WishListItem }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<WishListItem | null>(null);
+  const { user } = useAuth();
+  console.log(user);
   const openReviewModal = (book: WishListItem) => {
+    if (!user) return alert("로그인 후 이용해주세요.");
     setSelectedBook(book);
     setIsModalOpen(true);
   };

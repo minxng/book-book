@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from "@/hooks/useAuth";
 import { addWishList } from "@/lib/api/firebase";
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa6";
@@ -14,7 +15,9 @@ interface BookProps {
 }
 export default function WishButton({ book }: BookProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useAuth();
   const handleOnClick = async () => {
+    if (!user) return alert("로그인 후 이용해주세요.");
     const cover = book.cover.replace("coversum", "cover500");
     const result = await addWishList(
       book.itemId,
