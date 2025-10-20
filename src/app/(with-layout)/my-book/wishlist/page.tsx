@@ -17,11 +17,13 @@ type WishListItem = {
 
 export default function WishList() {
   const user = useAuth();
+  const [loading, setLoading] = useState(true);
   const [wishList, setWishList] = useState<WishListItem[]>([]);
   useEffect(() => {
     if (!user) return;
     const unsubscribe = subscribeToWishList((data) => {
       setWishList(data);
+      setLoading(false);
     });
     return () => {
       unsubscribe();
@@ -33,7 +35,8 @@ export default function WishList() {
   return (
     <>
       <ul className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 px-4 gap-4 md:gap-8 mt-4 ">
-        {!wishList.length && (
+        {loading && <p>loading...</p>}
+        {!loading && !wishList.length && (
           <p className="bg-primary-100 rounded-xl p-4 w-full flex justify-between col-span-2">
             찜한 도서가 없습니다.
           </p>

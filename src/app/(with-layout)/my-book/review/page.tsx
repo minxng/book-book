@@ -32,6 +32,7 @@ interface ReviewItem {
 
 export default function ReviewList() {
   const user = useAuth();
+  const [loading, setLoading] = useState(true);
   const [reviewList, setReviewList] = useState<ReviewItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<ReviewItem | null>(null);
@@ -46,6 +47,7 @@ export default function ReviewList() {
     if (!user) return;
     const unsubscribe = subscribeToReviewList((data) => {
       setReviewList(data);
+      setLoading(false);
     });
     return () => {
       unsubscribe();
@@ -113,7 +115,9 @@ export default function ReviewList() {
         />
       )}
       <ul className="mt-4 px-4">
-        {reviewList &&
+        {loading && <p>loading...</p>}
+        {!loading &&
+          reviewList &&
           reviewList.map((book) => (
             <li
               key={book.id}
@@ -183,7 +187,7 @@ export default function ReviewList() {
               </ul>
             </li>
           ))}
-        {!reviewList.length && (
+        {!loading && !reviewList.length && (
           <p className="bg-primary-100 rounded-xl p-4 w-full my-3 flex justify-between">
             등록된 리뷰가 없습니다.
           </p>
