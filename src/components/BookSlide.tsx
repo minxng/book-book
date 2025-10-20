@@ -37,7 +37,7 @@ export default function BookSlide({ books, title, type }: Book) {
   return (
     <section className="py-2 sm:py-6 px-2 sm:px-8 xl:px-0">
       <Link href={`/list/${type}`}>
-        <h2 className="text-lg sm:text-xl font-bold py-3 sm:py-4 flex items-center gap-2">
+        <h2 className="text-lg sm:text-xl py-3 sm:py-4 flex items-center gap-2">
           {title}
           <IoIosArrowForward />
         </h2>
