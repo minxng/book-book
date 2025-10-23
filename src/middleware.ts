@@ -9,6 +9,7 @@ export async function middleware(req: NextRequest) {
   }
 
   const token = req.cookies.get("authToken")?.value;
+  console.log(token, "token middleware");
   const authPages = ["/login", "/sign-up"];
   if (token && authPages.some((path) => pathname.startsWith(path))) {
     return NextResponse.redirect(new URL("/", req.url));

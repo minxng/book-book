@@ -15,6 +15,7 @@ export default function Login() {
     e.preventDefault();
     const result = await signIn(email, password);
     if (result.success) {
+      console.log(result, "result in login");
       router.replace("/");
     }
     if (!result.success) {
