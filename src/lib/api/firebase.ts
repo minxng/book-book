@@ -17,6 +17,7 @@ import {
   set,
   update,
 } from "firebase/database";
+import Cookies from "js-cookie";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY,
@@ -65,6 +66,11 @@ export const signIn = async (email: string, password: string) => {
       email,
       password
     );
+    const token = await userCredential.user.getIdToken();
+    Cookies.set("authToken", token, {
+      expires: 1,
+      path: "/",
+    });
     return { success: true, user: userCredential.user };
   } catch {
     return { success: false };
@@ -72,6 +78,7 @@ export const signIn = async (email: string, password: string) => {
 };
 
 export const signOutUser = () => {
+  Cookies.remove("authToken");
   signOut(auth);
 };
 
