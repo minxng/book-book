@@ -28,7 +28,7 @@ export default function Navigation() {
   const signOut = () => {
     if (confirm("로그아웃 하시겠습니까?")) {
       signOutUser();
-      router.push("/");
+      router.replace("/");
     }
   };
   return (
@@ -38,7 +38,7 @@ export default function Navigation() {
           <Image src={logo} alt="logo" width={100} />
         </Link>
       </h1>
-      <div className="border-emerald-800 border-1 p-2 rounded-2xl flex items-center w-full sm:w-1/2 order-3 sm:order-2">
+      <div className="border-emerald-800 border p-2 rounded-2xl flex items-center w-full sm:w-1/2 order-3 sm:order-2">
         <BiSearch size={24} className="text-primary" />
         <form onSubmit={handleOnSubmit} className="w-full">
           <input

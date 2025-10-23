@@ -27,7 +27,7 @@ export default function SignUp() {
     const result = await createUser(email, password, name);
     if (result.success) {
       signIn(email, password);
-      router.push("/");
+      router.replace("/");
     } else {
       if (result.error === "auth/email-already-in-use") {
         alert("이미 사용 중인 이메일입니다.");
