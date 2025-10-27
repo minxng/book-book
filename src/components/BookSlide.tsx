@@ -63,7 +63,7 @@ export default function BookSlide({ books, title, type }: Book) {
           {books.item.map((book) => (
             <SwiperSlide key={book.itemId}>
               <Link href={`/book/${book.isbn13}`}>
-                <div className="relative w-full aspect-[170/240]">
+                <div className="relative w-full aspect-170/240">
                   <Image
                     src={book.cover.replace("cover200", "cover500")}
                     alt="book cover"
@@ -91,7 +91,7 @@ export default function BookSlide({ books, title, type }: Book) {
           {Array.from({ length: 5 }).map((_, i) => (
             <div
               key={i}
-              className=" aspect-[170/240] bg-gray-200 animate-pulse rounded-lg"
+              className=" aspect-170/240 bg-gray-200 animate-pulse rounded-lg"
             />
           ))}
         </div>

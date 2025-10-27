@@ -13,7 +13,7 @@ export default function Tabs() {
               pathname === "/my-book/wishlist"
                 ? "bg-primary-500 text-white"
                 : "bg-gray-200 text-black"
-            }  px-8 py-2 cursor-pointer rounded-t-2xl`}
+            } px-6 sm:px-8 py-2 cursor-pointer rounded-t-2xl`}
           >
             위시리스트
           </li>
@@ -24,7 +24,7 @@ export default function Tabs() {
               pathname === "/my-book/review"
                 ? "bg-primary-500 text-white"
                 : "bg-gray-200 text-black"
-            }  px-8 py-2 cursor-pointer rounded-t-2xl`}
+            }  px-6 sm:px-8 py-2 cursor-pointer rounded-t-2xl`}
           >
             리뷰 작성한 도서
           </li>
