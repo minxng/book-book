@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingSpinner from "@/components/LoadingSpinner";
 import Rating from "@/components/Rating";
 import ReviewModal from "@/components/ReviewModal";
 import { useAuth } from "@/hooks/useAuth";
@@ -114,8 +115,8 @@ export default function ReviewList() {
           existingReview={selectedReview}
         />
       )}
+      {loading && <LoadingSpinner />}
       <ul className="mt-4 px-4">
-        {loading && <p>loading...</p>}
         {!loading &&
           reviewList &&
           reviewList.map((book) => (

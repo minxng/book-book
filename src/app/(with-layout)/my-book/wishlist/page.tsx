@@ -1,4 +1,5 @@
 "use client";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import ReviewButton from "@/components/ReviewButton";
 import { useAuth } from "@/hooks/useAuth";
 import { removeWishListItem, subscribeToWishList } from "@/lib/api/firebase";
@@ -34,8 +35,8 @@ export default function WishList() {
   };
   return (
     <>
+      {loading && <LoadingSpinner />}
       <ul className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 px-4 gap-4 md:gap-8 mt-4 ">
-        {loading && <p>loading...</p>}
         {!loading && !wishList.length && (
           <p className="bg-primary-100 rounded-xl p-4 w-full flex justify-between col-span-2">
             찜한 도서가 없습니다.
@@ -43,7 +44,7 @@ export default function WishList() {
         )}
         {wishList.map((book) => (
           <li key={book.id} className="flex flex-col gap-2">
-            <div className="relative w-full aspect-[2/3]">
+            <div className="relative w-full aspect-2/3">
               <Link href={`/book/${book.isbn13}`}>
                 <Image
                   src={book.cover}
@@ -59,7 +60,7 @@ export default function WishList() {
               <ReviewButton book={book} />
               <button
                 onClick={() => deleteItem(book.id)}
-                className="border-1 border-primary-200 p-3 rounded cursor-pointer"
+                className="border border-primary-200 p-3 rounded cursor-pointer"
               >
                 <FaRegTrashAlt />
               </button>

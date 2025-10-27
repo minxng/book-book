@@ -1,7 +1,9 @@
+import LoadingSpinner from "@/components/LoadingSpinner";
+
 export default function loading() {
   return (
     <div className="container-style my-0">
-      <div className="w-full text-center p-10">loading</div>
+      <LoadingSpinner />
     </div>
   );
 }
