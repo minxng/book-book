@@ -32,7 +32,7 @@ export default function Navigation() {
     }
   };
   return (
-    <nav className="flex max-w-[1200px] w-full mx-auto my-0 px-4 sm:px-8 py-4  gap-3 sm:gap-8 items-center justify-between flex-wrap sm:flex-nowrap">
+    <nav className="flex max-w-[1200px] w-full mx-auto my-0 px-4 sm:px-8 py-4  gap-3 sm:gap-8 items-center justify-between flex-wrap sm:flex-nowrap sticky top-0 z-50 bg-white">
       <h1>
         <Link href={"/"}>
           <Image src={logo} alt="logo" width={100} />
