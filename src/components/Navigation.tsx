@@ -28,7 +28,8 @@ export default function Navigation() {
   const signOut = () => {
     if (confirm("로그아웃 하시겠습니까?")) {
       signOutUser();
-      router.replace("/");
+      window.location.replace("/");
+      // router.replace("/");
     }
   };
   return (

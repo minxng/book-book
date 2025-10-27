@@ -3,20 +3,20 @@ import Input from "@/components/Input";
 import { signIn } from "@/lib/api/firebase";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useState } from "react";
 import logo from "../../../public/logo.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
+  // const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = await signIn(email, password);
     if (result.success) {
       console.log(result, "result in login");
-      router.replace("/");
+      window.location.replace("/");
     }
     if (!result.success) {
       alert(
