@@ -4,12 +4,12 @@ import { NextResponse } from "next/server";
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const publicPaths = ["/_next", "/favicon.ico"];
+
   if (publicPaths.some((path) => pathname.startsWith(path))) {
     return NextResponse.next();
   }
 
   const token = req.cookies.get("authToken")?.value;
-  console.log(token, "token middleware");
   const authPages = ["/login", "/sign-up"];
   if (token && authPages.some((path) => pathname.startsWith(path))) {
     return NextResponse.redirect(new URL("/", req.url));
