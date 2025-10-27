@@ -70,6 +70,8 @@ export const signIn = async (email: string, password: string) => {
     Cookies.set("authToken", token, {
       expires: 1,
       path: "/",
+      sameSite: "none",
+      secure: true,
     });
     return { success: true, user: userCredential.user };
   } catch {
