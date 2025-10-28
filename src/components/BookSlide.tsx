@@ -67,7 +67,7 @@ export default function BookSlide({ books, title, type }: Book) {
                   <Image
                     src={book.cover.replace("cover200", "cover500")}
                     alt="book cover"
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain hover:scale-[1.02] hover:shadow-lg transition-transform"
                     fill
                     sizes="true"
                   />

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 export default function Tabs() {
   const pathname = usePathname();
   return (
-    <section>
+    <section className="mt-4 sm:mt-8 ">
       <ul className="flex text-center px-4 gap-2">
         <Link href="/my-book/wishlist">
           <li

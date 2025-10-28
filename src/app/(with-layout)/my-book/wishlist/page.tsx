@@ -38,7 +38,7 @@ export default function WishList() {
       {loading && <LoadingSpinner />}
       <ul className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 px-4 gap-4 md:gap-8 mt-4 ">
         {!loading && !wishList.length && (
-          <p className="bg-primary-100 rounded-xl p-4 w-full flex justify-between col-span-2">
+          <p className="bg-primary-100 rounded-xl p-4 w-full flex justify-between col-span-5">
             찜한 도서가 없습니다.
           </p>
         )}
@@ -51,11 +51,12 @@ export default function WishList() {
                   alt="표지"
                   fill
                   sizes=""
-                  className="object-contain"
+                  className="object-contain hover:scale-[1.02] hover:shadow-lg transition-transform"
                 />
               </Link>
             </div>
             <p className="overflow-ellipsis line-clamp-1">{book.title}</p>
+            <p></p>
             <div className="flex gap-2">
               <ReviewButton book={book} />
               <button

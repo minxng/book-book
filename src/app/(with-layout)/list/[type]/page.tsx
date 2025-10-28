@@ -43,7 +43,7 @@ export default async function ListPage({ params, searchParams }: PageProps) {
     : "전체";
 
   return (
-    <section className="container-style mt-4 border-primary-200 border-t-1 sm:p-0 p-4">
+    <section className="container-style mt-4 sm:p-0 p-4">
       <div className="flex sm:mt-8 mt-0 sm:flex-row flex-col">
         <div className="basis-1/5">
           <SideCategorise categoryId={categoryId} />

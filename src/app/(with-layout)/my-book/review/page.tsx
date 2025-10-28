@@ -122,7 +122,7 @@ export default function ReviewList() {
           reviewList.map((book) => (
             <li
               key={book.id}
-              className="grid grid-cols-[max-content_1fr] gap-4 py-6 first:pt-0 border-b-1 border-gray-200 justify-center"
+              className="grid grid-cols-[max-content_1fr] gap-4 py-6 first:pt-0 border-b border-gray-200 justify-center"
             >
               <div className="sm:w-[200px] w-[120px] row-start-1 row-end-3 sm:row-end-4 col-start-1 col-end-2">
                 <Image
