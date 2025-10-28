@@ -22,36 +22,36 @@ export default function Login() {
     }
   };
   return (
-    <section className="w-96 mx-auto px-4">
-      <Link href="/">
-        <Image src={logo} alt="logo" width={300} className="mx-auto my-16" />
-      </Link>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <Input
-          type="text"
-          onChange={setEmail}
-          placeholder="이메일 주소를 입력해주세요"
-        />
-        <Input
-          type="password"
-          onChange={setPassword}
-          placeholder="비밀번호를 입력해주세요"
-        />
-        <button
-          type="submit"
-          className="p-3 bg-primary-300 rounded cursor-pointer"
-        >
-          로그인
-        </button>
-      </form>
-      <Link href={"/sign-up"}>
-        <button
-          type="submit"
-          className="w-full p-3 bg-primary-100 rounded mt-2 cursor-pointer"
-        >
-          회원가입
-        </button>
-      </Link>
+    <section className="h-lvh bg-gray-50 flex items-center">
+      <div className="w-96 mx-auto sm:border border-primary-200 rounded-2xl px-8 pb-12 bg-white">
+        <Image src={logo} alt="logo" width={200} className="mx-auto my-12" />
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <Input
+            type="text"
+            onChange={setEmail}
+            placeholder="이메일 주소를 입력해주세요"
+          />
+          <Input
+            type="password"
+            onChange={setPassword}
+            placeholder="비밀번호를 입력해주세요"
+          />
+          <button
+            type="submit"
+            className="p-3 bg-primary-300 rounded cursor-pointer"
+          >
+            로그인
+          </button>
+        </form>
+        <Link href={"/sign-up"}>
+          <button
+            type="submit"
+            className="w-full p-3 bg-primary-100 rounded mt-2 cursor-pointer"
+          >
+            회원가입
+          </button>
+        </Link>
+      </div>
     </section>
   );
 }

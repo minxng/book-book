@@ -7,7 +7,7 @@ type Props = {
 export default function Input({ type, placeholder, onChange }: Props) {
   return (
     <input
-      className="border-primary-600 border-1 rounded p-2"
+      className="border-gray-300 border rounded p-2"
       type={type}
       placeholder={placeholder}
       onChange={(e) => onChange(e.target.value)}
