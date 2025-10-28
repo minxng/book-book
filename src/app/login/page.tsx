@@ -22,7 +22,7 @@ export default function Login() {
     }
   };
   return (
-    <section className="h-lvh bg-gray-50 flex items-center">
+    <section className="h-lvh sm:bg-gray-50 flex items-center">
       <div className="w-96 mx-auto sm:border border-primary-200 rounded-2xl px-8 pb-12 bg-white">
         <Image src={logo} alt="logo" width={200} className="mx-auto my-12" />
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
