@@ -39,26 +39,28 @@ export default function SignUp() {
     }
   };
   return (
-    <section className="w-96 mx-auto px-4">
-      <Link href="/">
-        <Image src={logo} alt="logo" width={300} className="mx-auto my-16" />
-      </Link>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <label>이름</label>
-        <Input type="text" onChange={setName} />
-        <label>이메일</label>
-        <Input type="text" onChange={setEmail} />
-        <label>비밀번호</label>
-        <Input type="password" onChange={setPassword} />
-        <label>비밀번호 확인</label>
-        <Input type="password" onChange={setCheckPassword} />
-        <button
-          type="submit"
-          className="w-full p-3 bg-primary-200 rounded mt-2 cursor-pointer"
-        >
-          회원가입
-        </button>
-      </form>
+    <section className="h-lvh sm:bg-gray-50 flex items-center">
+      <div className="w-96 mx-auto sm:border border-primary-200 rounded-2xl px-8 pb-12 bg-white">
+        <Link href="/">
+          <Image src={logo} alt="logo" width={200} className="mx-auto my-12" />
+        </Link>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+          <label>이름</label>
+          <Input type="text" onChange={setName} />
+          <label>이메일</label>
+          <Input type="text" onChange={setEmail} />
+          <label>비밀번호</label>
+          <Input type="password" onChange={setPassword} />
+          <label>비밀번호 확인</label>
+          <Input type="password" onChange={setCheckPassword} />
+          <button
+            type="submit"
+            className="w-full p-3 bg-primary-200 rounded mt-2 cursor-pointer"
+          >
+            회원가입
+          </button>
+        </form>
+      </div>
     </section>
   );
 }
