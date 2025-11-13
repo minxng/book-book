@@ -6,7 +6,7 @@
 
 ## 🚀 URL
 
-🔗 [https://book-109.netlify.app/]
+🔗 https://book-109.netlify.app/
 
 <br />
 
@@ -50,5 +50,26 @@
 <br />
 
 ## 📸 Preview
+- 메인페이지
+<img width="70%" height="957" alt="Image" src="https://github.com/user-attachments/assets/8d037582-4016-4583-be00-22671836cad2" />
+<br />
 
-// 이미지 추가
+<br />
+
+- 리스트 페이지
+<br />
+<img width="70%" height="957" alt="Image" src="https://github.com/user-attachments/assets/3e7005c1-466a-41f6-8bb4-4f3207964f13" />
+<br />
+
+<br />
+
+- 상세 페이지
+<br />
+<img width="70%" height="957" alt="Image" src="https://github.com/user-attachments/assets/37519d6f-2636-45db-8ac6-4d009b633be3" />
+<br />
+
+<br />
+
+- 마이페이지 - 리뷰
+<br />
+<img width="70%" height="957" alt="Image" src="https://github.com/user-attachments/assets/cd91c090-bcb9-4ed3-9458-c5c15e3fefeb" />
