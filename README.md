@@ -2,13 +2,13 @@
 
 **BookLog**는 알라딘 Open API를 활용해 사용자가 원하는 도서를 검색하고, 찜 및 리뷰를 관리할 수 있는 웹 서비스입니다.
 
----
+<br />
 
 ## 🚀 URL
 
 🔗 [https://book-109.netlify.app/]
 
----
+<br />
 
 ## 🛠️ Tech Stack
 
@@ -19,7 +19,7 @@
 | **Deploy**                    | Netlify                                             |
 | **External API**              | 알라딘 Open API                                     |
 
----
+<br />
 
 ## 🔑 주요 기능
 
@@ -47,7 +47,7 @@
 - 찜한 도서 삭제 및 리뷰 추가·수정·삭제 기능 지원
 - **Firebase Realtime Database**와 연동되어 데이터 변경이 실시간으로 UI에 반영
 
----
+<br />
 
 ## 📸 Preview
 
